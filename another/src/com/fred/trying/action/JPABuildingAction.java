@@ -15,11 +15,11 @@ import com.fred.trying.service.JPABuildingService;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Namespace("/crm")
-@ParentPackage("josn-default")
+@ParentPackage("json-default")
 @Action(value="jpaBuildingAction")
 @Results({
 	@Result(name = "input", location = "jpabuilding.jsp"),
-	@Result(name = "jsondata",type ="json",params = {"includeproperty","buildingLs.*"})
+	@Result(name = "jsondata",type ="json",params = {"includeproperties","buildingLs.*"})
 })
 public class JPABuildingAction extends ActionSupport{
 
