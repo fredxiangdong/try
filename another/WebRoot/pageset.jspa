@@ -1,0 +1,19 @@
+<!DOCTYPE>
+
+    <!--ÒýÈëstruts±êÇ©¿â-->
+	<%@taglib prefix="s" uri="/struts-tags"%>
+	
+    <link href="/another/plugin/easyui/css/default.css" rel="stylesheet" type="text/css" />
+  	<link rel="stylesheet" type="text/css" href="/another/plugin/easyui/js/themes/default/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="/another/plugin/easyui/js/themes/icon.css" /> 
+    <script type="text/javascript" src="/another/plugin/easyui/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/another/plugin/easyui/js/jquery.easyui.min.js"></script> 
+    <script type="text/javascript" src="/another/plugin/easyui/js/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="/another/plugin/artDialog/artDialog.js?skin=blue"></script>
+    <script type="text/javascript" src="/another/plugin/easyui/js/extends.js"></script> 
+	<script type="text/javascript" src="/another/commonUtil.js"></script>
+
+	
+   
+    
+	  

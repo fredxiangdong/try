@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+ 	<constant name="struts.convention.result.path" value="/" /> 
+    <!-- 修改struts2访问链接的后缀名，改成.do的形式 -->
+    <constant name="struts.action.extension" value="do"></constant>
+    <!-- 修改struts2的UI主题，改为简单模式 -->
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <!-- 修改struts2的开发模式，默认是false -->
+    <constant name="struts.devMode" value="false"></constant>
+    <!-- 修改struts2的字符编码 -->
+    <constant name="struts.i18n.encoding" value="utf-8"></constant>
+    <!-- struts2动态方法调用：action名!方法名.action -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<!-- 配置struts2.1.8 上传是文件的最大限制为100M -->
+	<constant name="struts.multipart.maxSize" value="104857600" />
+	<!-- 设置struts2 上传文件时  保存的临时目录 -->
+	<constant name="struts.multipart.saveDir" value="E:\temp"></constant> 
+</struts>    
