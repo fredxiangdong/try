@@ -1,187 +1,136 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <head>
+  	<title>楼宇管理</title>
+  	<!--引入struts标签库-->
+	<%@taglib prefix="s" uri="/struts-tags"%>
 
+	<!--引入jquery-->
+	<script type="text/javascript" src="/another/plugin/easyui/js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/another/plugin/artDialog/artDialog.js?skin=blue"></script>
+	<script type="text/javascript" src="/another/commonUtil.js"></script>
+	<script type="text/javascript" src="/another/plugin/jquery-easyui-1.3.4/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/another/plugin/jquery-easyui-1.3.4/locale/easyui-lang-zh_CN.js"></script>
+    <link rel ="stylesheet" type ="text/css" href="/another/plugin/jquery-easyui-1.3.4/themes/icon.css">
+    <link rel ="stylesheet" type ="text/css" href="/another/plugin/jquery-easyui-1.3.4/themes/metro/easyui.css">
 
-<!--引入struts标签库-->
-<%@taglib prefix="s" uri="/struts-tags"%>
-
-<!--引入jquery-->
-<script type="text/javascript" src="../jquery.js"></script>
-
-<title>Insert title here</title>
-</head>
-<body>
-<s:hidden id="building" value="building" upload="true"/>
-<s:textfield value="%{test}" />
-<s:textfield value="%{building.buildingId}" title="小区ID"/>
-<s:textfield value="%{building.buildingName}" title="小区名称"/>
-<!--struts标签配合OGNL方法以setget方式取值-->
-
-<%=request.getAttribute("target") %>
-<!--servlet方式取值-->
-
-<!-- EL表达式形式为 ${expression} -->
-
-<!--struts 判断-->
-<s:set name="age" value="24"/>
-<s:if test="$(age<10)">
-	少年
-</s:if>
-<s:elseif test="$(age>60)">
-	老人
-</s:elseif>
-<s:else>
-	壮年
-</s:else>
-
-
-<s:form action="" method="post">
-	<s:textfield name="%{test}"/>
-	<s:textfield name="%{test}" readonly="true"/>
-</s:form>
-
-<s:form name="form1" >
-    <s:doubleselect label="请选择所在省市"
-
-       name="province" id="provinceId" list="{'四川省','山东省'}" doubleName="city"
-
-       doubleList="top == '四川省' ? {'成都市', '绵阳市'} : {'济南市', '青岛市'}" />
-       
-       <input name="button" id="button" onclick="userCheck()" value="button提交" type="button">
-
-</s:form>
-
-
-
-
-<s:form>
-
-    <s:checkboxlist name="interest" list="{'足球','篮球','排球','游泳'}" label="兴趣爱好"/>
-    
-<s:form id="testform">
-	<s:hidden id="buildingLs" name="buildingLs" />
+  </head>
+  
+  <body class="easyui-layout" >
+    <div id="body" region="center" > 
+ 	 <!-- 查询条件区域 -->
+	  <div id="search_area" >
+	    <div id="conditon">
+	      <table border="0">
+	        <tr>
+		      <td>&nbsp;ID：</td>
+	          <td><input  name="sex" id="sex"  class = "searchCondition" />
+	          <td>&nbsp;Name：</td>
+	          <td><input  name="department" id="department"   class = "searchCondition"/></td>
+	          <td>
+	              <a  href="javascript:void(0)" class="easyui-linkbutton my-search-button" iconCls="icon-search" plain="true" onclick="retrive()">查询</a> 
+	              <a  href="javascript:void(0)" class="easyui-linkbutton my-search-button" iconCls="icon-reset" plain="true" onclick = "reset()">重置</a>
+	          </td>
+	        </tr>
+	      </table>
+	    </div>
+	    <span id="openOrClose"></span> 
+	  </div>
+	  <!-- 数据表格区域 -->
+	  <table id="tt" style="table-layout:fixed;" ></table>
+	  <!-- 表格顶部工具按钮 -->
+	  <div id="tt_btn">
+	      <a href="javascript:void(0)"  id="save" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
+	      <a href="javascript:void(0)"  id="update" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a> 
+	      <a href="javascript:void(0)"  id="delete" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+	   </div>
+	   
+	   <div id="dd" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-search'" 
+  	     style="width:600px;height:500px;padding:0px;">
+  	     <iframe id="frametest" width='99%' height='99%' src=''></iframe>
+	   </div>
+	   
+ 	</div>
 	
-	   <s:iterator id="building" value="buildingLs">
-	   	<table>
-	   		<tr>
-	   			<td>小区ID	</td>
-	   			<td title="ID"><s:property value="#building.buildingId" /></td>
-	   			<td>小区名称	</td>
-	   			<td><s:property value="#building.buildingName" />
-	   			</td>
-	   		</tr>
-	   	</table>
-    </s:iterator>
-        <s:textarea id="output" name="personal" cols="100" rows="5" label="个人简历"></s:textarea>
-        <br/>
-    <s:select label="最高学历" name="education" list="{'高中','大学','硕士','博士'}"/>
-    <s:select label="小区" name="buildId" id="_buildingId"  list="%{buildingLs}" listKey="buildingId" listValue="buildingName"/>
-	<br/>
-	<input type="button" onclick="submitTest()" value="得到小区ID">
-	<input type="button" onclick="submitCollection()" value="得到小区集合">
-    <input type="button" onclick="importExcel()" value="导入Excel数据">
-    <input type="button" onclick="retriveStock()" value="获取股票数据">
-    
-</s:form>
-</s:form>
-
-
-
-</body>
-<script type="text/javascript">  
-    function userCheck(){  
-        var form = document.form1;  
-        var province = form.province.value; 
-       var pro = document.getElementById("provinceId").value;
-       alert(pro);
-        alert(province);
-        //传统JSP方法取得前台对象
-    }  
-   
-    function submitTest(){
-        var buildId = $("#_buildingId").val();  
- 		alert(buildId);
-		//JQury方式取得数据
-		 var url = 'testAjax.do';  
-                var params = {  
-                    "action" :"testAjax",
-                    buildingId:buildId  
-                };  
-                jQuery.post(url, params, callbackFun, 'json'); 
-         }
-         
-//		$.ajax({
-//        type: "GET",
-//        url: "buildingAction.do?action=testAjax",
-//        data: {
-//        
-//        },
-//        params :{
-//        	buildingId : buildId
-//        },
-//        success: function(response){
-//		alert("cc");
-//		}
-//        var decimal = document.getElementById('decimal'); 
-//        $("#decimal").val($("key",xml).text());
-//
-//        $("#rating").html("按键代码：" + $("key",xml).text());
-//        }    
-
-    
-    
-    function callbackFun(data)  
-       {  
-           alert(data);
-           $("#output").val(data);
-       }
-    
-    
-    function submitCollection(){
-     var buildingLs = $("#buildingLs").val();  
-/*     var list = [];
-     list.push(buildingLs) ;*/
- 		alert(buildingLs);
-		//JQury方式取得数据
-		 var url = 'testAjaxCollect.do';  
-                var params = {  
-                    buildingLs: buildingLs  
-                };  
-                jQuery.post(url, params, CollectcallbackFun, 'json');
-    }
-    
-        function CollectcallbackFun(data)  
-       {  
-           alert(data);
-           $("#output").val(data.buildingName);
-       }
-       
-       function importExcel()  
-       {  
-	       $.ajax({
-	       type: "GET",
-	       url: "buildingAction.do?action=importExcel",
-	       success: successCallbackFun
-			});
-		}
+  </body>
+  
+  <script type="text/javascript">
+	  $(function(){
+		$("#tt").datagrid({
+			height:$("#body").height()-$('#search_area').height()-5,
+			width:$("#body").width(),
+			idField:'userId',
+			//data: data,
+//  			url:"../plugin/easyui/datagrid.json",  //可以填入静态JSON数据
+// 			url:"/another/crm/gsonAction!testGson.do", //但不可以用这种动态请求
+			singleSelect:true, 
+			nowrap:true,
+			fitColumns:true,
+			rownumbers:true,
+			showPageList:false,
+			columns:[[
+				{field:'buildingId',title:'buildingId',width:100,halign:"center", align:"left"},
+				{field:'buildingName',title:'buildingName',width:100,halign:"center", align:"left"},
+				{field:'createdStamp',title:'createdStamp',width:60,halign:"center", align:"left"},
+				{field:'createdByUserLogin',title:'createdByUserLogin',width:100,halign:"center", align:"left"}
+			]], 
+			toolbar:'#tt_btn',  
+	        pagination:true,
+			onDblClickRow:function(rowIndex, rowData){
+				viewDetail(rowData.userId);
+			}
+		});
 		
-		  function successCallbackFun()  
-       {  
-           alert("success");
-       }
-
-       function retriveStock(){
-      		$.ajax({
-      			type:"POST",
-      			url : "buildingAction.do?action=retriveStockData",
-      			success:successCallbackFun
-      		});
-       }
-
-       
-</script>
+		//新增弹出框
+		$("#save").on("click", function(){
+			$('#frametest').attr('src','/another/crm/jpaBuildingAction!add.do');
+	       $('#dd').window('open');
+		});
+		
+		//修改
+		$("#update").on("click", function(){
+			$parent.messager.alert("提示","update", "info");
+		});
+		
+		//删除
+		$("#delete").on("click", function(){
+			$parent.messager.alert("提示","delete", "info");
+		});
+	});
+	
+	function viewDetail(date, id){
+		yalert("查看详细");
+// 		$parent.messager.alert("提示","查询详细", "info");
+	}
+	
+	//监听窗口大小变化
+	window.onresize = function(){
+		setTimeout(domresize,300);
+	};
+	//改变表格宽高
+	function domresize(){
+		$('#tt').datagrid('resize',{  
+			height:$("#body").height()-$('#search_area').height()-5,
+			width:$("#body").width()
+		});
+	}
+	
+	function retrive(){
+		$.ajax({
+			method : "post",
+			url : "/another/crm/jpaBuildingAction!retrive.do", 
+			dataType : "text",
+			success : function(data){
+				var result = $.parseJSON(data);
+			    var datasource = { total: result.total, rows: result.rows };
+			    $("#tt").datagrid('loadData', datasource);
+			 }
+		});
+	}
+	
+	function reset(){
+		$(".searchCondition").val("");
+	}
+  </script>
 </html>

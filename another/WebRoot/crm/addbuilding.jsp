@@ -1,14 +1,18 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>Basic Form - jQuery EasyUI Demo</title>
-	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="../demo.css">
-	<script type="text/javascript" src="../../jquery.min.js"></script>
-	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
-</head>
+  <head>
+    
+    <title>添加楼宇</title>
+    <%@include file="../../pageset.jspa" %>
+  </head>
+  
+  <body>
 <body>
 	<h2>Basic Form</h2>
 	<div class="demo-info">
@@ -18,7 +22,7 @@
 	<div style="margin:10px 0;"></div>
 	<div class="easyui-panel" title="New Topic" style="width:400px">
 		<div style="padding:10px 0 10px 60px">
-	    <form id="ff" method="post">
+	    <form id="ff" method="post" action = "jpaBuildingAction!save.do">
 	    	<table>
 	    		<tr>
 	    			<td>BuildingName</td>
@@ -28,10 +32,7 @@
 	    			<td>BuildingCode:</td>
 	    			<td><input class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
 	    		</tr>
-	    		<tr>
-	    			<td>Subject:</td>
-	    			<td><input class="easyui-validatebox" type="text" name="subject" data-options="required:true"></input></td>
-	    		</tr>
+	    		
 	    		<tr>
 	    			<td>remark:</td>
 	    			<td><textarea name="message" style="height:60px;"></textarea></td>
@@ -53,4 +54,5 @@
 		}
 	</script>
 </body>
+  </body>
 </html>
