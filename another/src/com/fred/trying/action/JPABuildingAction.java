@@ -20,8 +20,10 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({
 	@Result(name = "input", location = "jpabuilding.jsp"),
 	@Result(name = "add", location = "addbuilding.jsp"),
-	@Result(name = "jsondata",type ="json",params = {"includeproperties","rows.*,total"})
+	@Result(name = "jsondata",type ="json",params = {"includeproperties","rows.*,total"}),
+	@Result(name = "addbck",type = "json", params = {"includeproperties","genedID"})
 })
+
 public class JPABuildingAction extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
@@ -32,6 +34,8 @@ public class JPABuildingAction extends ActionSupport{
 	private List<JPACommunityBuilding> rows = new ArrayList<JPACommunityBuilding>();
 	
 	private JPACommunityBuilding building;
+	
+	private String genedID;
 	
 	private String total = "0";
 	 
@@ -47,12 +51,16 @@ public class JPABuildingAction extends ActionSupport{
 	}
 	
 	public String add(){
+		building = new JPACommunityBuilding();
+		building.setBuildingName("2");
+		building.setBuildingCode("100");
 		return "add";
 	}
 
 	public String save(){
 		building = buildingService.save(building);
-		return "add";
+		genedID = building.getBuildingId();
+		return "addbck";
 	}
 	
 	public List<JPACommunityBuilding> getRows() {
@@ -77,6 +85,14 @@ public class JPABuildingAction extends ActionSupport{
 
 	public void setBuilding(JPACommunityBuilding building) {
 		this.building = building;
+	}
+
+	public String getGenedID() {
+		return genedID;
+	}
+
+	public void setGenedID(String genedID) {
+		this.genedID = genedID;
 	}
 	
 }

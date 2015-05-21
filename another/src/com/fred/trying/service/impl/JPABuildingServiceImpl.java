@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fred.common.HyCommonUtil;
 import com.fred.common.UUIDGenerator;
 import com.fred.trying.entity.JPACommunityBuilding;
 import com.fred.trying.service.JPABuildingService;
@@ -51,11 +52,17 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 
 	@Transactional(propagation = Propagation.REQUIRED,readOnly=false)
 	public JPACommunityBuilding save(JPACommunityBuilding building) {
-		if(building.getBuildingId() == null){
+		if(HyCommonUtil.strIsNull(building.getBuildingId())){
+//		if(building.getBuildingId() == null || building.getBuildingId().trim().equals("")){
 			UUIDGenerator uuidgen = new UUIDGenerator();
 			building.setBuildingId(uuidgen.generate().toString());
+			em.persist(building);
+		}else{
+			em.merge(building);
 		}
-		em.persist(building);
+//		也可两种情况都用merge()方法，merge方法，原来没有的数据进行persist，触发listener的@prepersist，原来有的数据
+//		则进行update，触发listener的@preUpdate
+		em.merge(building);
 		return building;
 	}
 

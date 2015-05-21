@@ -12,21 +12,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <%@include file="../../pageset.jspa" %>
   </head>
   
-  <body>
 <body align="center">
 	<h2>添加楼宇</h2>
 	<div class="demo-info">
 		<div class="demo-tip icon-tip"></div>
 		<div>Fill the form and submit it.</div>
 	</div>
+	
 	<div style="margin:10px 0;"></div>
+	
 	<div class="easyui-panel" title="New Topic" style="width:400px">
+	
 		<div style="padding:100px 0 10px 60px">
-	    <form id="ff" method="post" action = "jpaBuildingAction!save.do">
+	    <form id="ff" method="post" action = "/another/crm/jpaBuildingAction!save.do"> 
 	    	<table>
 	    		<tr>
 	    			<td>BuildingName</td>
-	    			<td><s:textfield name ="building.buildingName" id="buildingName"></s:textfield></td>
+	    			<td><s:textfield name ="building.buildingName" id="buildingName" upload = "true"></s:textfield></td>
 	    		</tr>
 	    		<tr>
 	    			<td>BuildingCode:</td>
@@ -37,24 +39,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<td>remark:</td>
 	    			<td><s:textfield name ="building.remark" id ="remark"></s:textfield></td>
 	    		</tr>
+	    			<s:hidden id="buildingId" property = "building.buildingId"/>
 	    	</table>
-	    </form>
+<!-- 	    </form> -->
 	    </div>
+	    
 	    <div style="text-align:center;padding:5px">
-	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">Submit</a>
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="subdata()">Submit</a>
 	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
 	    </div>
+	    
 	</div>
-	<script>
-		function submitForm(){
-			$.ajax
-			$('#ff').form('submit');
+	
+</body>
+  <script type ="text/javascript">
+		function subdata(){
+ 			$.ajax({
+				method : "post",
+				dataType:"text",
+ 				data :{
+					"building.buildingName" : $("#buildingName").val().trim(), 
+					"building.buildingCode":$("#buildingCode").val().trim(),  
+		    		"building.remark":$("#remark").val().trim(),  
+		    		"building.buildingId":$("#buildingId").val().trim()  
+				}, 
+				url : "/another/crm/jpaBuildingAction!save.do",
+				success : function(data){
+				var result = $.parseJSON(data);
+				alert(result.genedID);
+					$("#buildingId").val(result.genedID);
+// 					saveCalBck();
+				}
+			}); 
+// 			$('#ff').form('submit');
+		}
+		
+		
+		function saveCalBck(){
+		alert(1);
+/* 			alert(data);
+			$("#buildingId").val(data); */
 			dalert("提交成功");
 		}
+		
+		
 		function clearForm(){
 			$('#ff').form('clear');
 		}
 	</script>
-</body>
-  </body>
 </html>
