@@ -14,13 +14,6 @@ public class EntityListener {
 
 	private String getUser()
 	  {
-		//原版
-/*	    UserView uview = ContextUtil.getUserView();
-	    if (uview == null) return "none user!";
-	    return uview.getLoginCode();*/
-		
-		//模拟
-//		User user = new User("3","有时","祥东","男","烟台");
 		Map session = ActionContext.getContext().getSession();
 		User user = (User)session.get("user");
 		if(user == null) return "no user";//加拦截器之后其实不必要

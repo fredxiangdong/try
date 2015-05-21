@@ -78,11 +78,6 @@
   </filter-mapping>
   
   
-  <listener>
-  	<listener-class>
-  		org.springframework.web.context.ContextLoaderListener
-  	</listener-class>
-  </listener>
   
   <context-param>
 	<param-name>contextConfigLocation</param-name>
@@ -103,6 +98,12 @@
         <param-value>60000</param-value>   
     </context-param>   
     
+  <listener>
+  	<listener-class>
+  		org.springframework.web.context.ContextLoaderListener
+  	</listener-class>
+  </listener>
+  
 <!--     需要添加spring-web.jar包，否则用发生错误信息   -->
     <listener>   
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>   

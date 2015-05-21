@@ -25,14 +25,15 @@ import com.opensymphony.xwork2.ActionSupport;
 public class JPABuildingAction extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private JPABuildingService buildingService;
 	
 	private List<JPACommunityBuilding> rows = new ArrayList<JPACommunityBuilding>();
 	
-	private String total = "0";
+	private JPACommunityBuilding building;
 	
-	private String BuildingName;
+	private String total = "0";
 	 
 	 @Override
 	public String execute(){ 
@@ -49,10 +50,11 @@ public class JPABuildingAction extends ActionSupport{
 		return "add";
 	}
 
-	public void save(){
-		System.out.println(BuildingName);
-//		 buildingService.save();
+	public String save(){
+		building = buildingService.save(building);
+		return "add";
 	}
+	
 	public List<JPACommunityBuilding> getRows() {
 		return rows;
 	}
@@ -69,13 +71,12 @@ public class JPABuildingAction extends ActionSupport{
 		this.total = total;
 	}
 
-	public String getBuildingName() {
-		return BuildingName;
+	public JPACommunityBuilding getBuilding() {
+		return building;
 	}
 
-	public void setBuildingName(String buildingName) {
-		BuildingName = buildingName;
+	public void setBuilding(JPACommunityBuilding building) {
+		this.building = building;
 	}
-	
 	
 }

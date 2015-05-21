@@ -13,29 +13,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-<body>
-	<h2>Basic Form</h2>
+<body align="center">
+	<h2>添加楼宇</h2>
 	<div class="demo-info">
 		<div class="demo-tip icon-tip"></div>
 		<div>Fill the form and submit it.</div>
 	</div>
 	<div style="margin:10px 0;"></div>
 	<div class="easyui-panel" title="New Topic" style="width:400px">
-		<div style="padding:10px 0 10px 60px">
+		<div style="padding:100px 0 10px 60px">
 	    <form id="ff" method="post" action = "jpaBuildingAction!save.do">
 	    	<table>
 	    		<tr>
 	    			<td>BuildingName</td>
-	    			<td><input class="easyui-validatebox" type="text" name="name" data-options="required:true"></input></td>
+	    			<td><s:textfield name ="building.buildingName" id="buildingName"></s:textfield></td>
 	    		</tr>
 	    		<tr>
 	    			<td>BuildingCode:</td>
-	    			<td><input class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
+	    			<td><s:textfield name ="building.buildingCode" id ="buildingCode"></s:textfield></td>
 	    		</tr>
 	    		
 	    		<tr>
 	    			<td>remark:</td>
-	    			<td><textarea name="message" style="height:60px;"></textarea></td>
+	    			<td><s:textfield name ="building.remark" id ="remark"></s:textfield></td>
 	    		</tr>
 	    	</table>
 	    </form>
@@ -47,7 +47,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<script>
 		function submitForm(){
+			$.ajax
 			$('#ff').form('submit');
+			dalert("提交成功");
 		}
 		function clearForm(){
 			$('#ff').form('clear');

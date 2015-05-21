@@ -12,7 +12,7 @@ version="1.0">
 <!-- <property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDrive"/> 
         <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:orcl"/> 
 <property name="hibernate.connection.username" value="scott"/> 
-<property name="hibernate.connection.password" value="ffffff"/>  -->
+<property name="hibernate.connection.password" value="ffffff"/> -->
 <!--以上为不与spring集成时需要的配置项--> 
     
    
