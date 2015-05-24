@@ -10,7 +10,8 @@ import com.opensymphony.xwork2.ActionSupport;
 @Namespace("/easyui")
 @Action(value ="easyUiUserAction")
 @Results({
-	@Result(name="input" ,location="userdata.jsp")
+	@Result(name="input" ,location="userdata.jsp"),
+	@Result(name = "demogrid",location = "easyuigrid.jsp")
 })
 public class EasyUiUserAction extends ActionSupport{
 
@@ -18,5 +19,9 @@ public class EasyUiUserAction extends ActionSupport{
 
 	public String execute(){
 		return INPUT;
+	}
+	
+	public String demogrid(){
+		return "demogrid";
 	}
 }

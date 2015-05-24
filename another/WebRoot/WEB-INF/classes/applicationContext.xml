@@ -15,8 +15,10 @@
 	<!-- 启动Spring注解自动注入Bean -->
 	<context:component-scan base-package="com.fred"/>
 
+	<!-- 该 BeanPostProcessor 将自动对标注 @Autowired 的 Bean 进行注入 -->  
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
+	<!--对@AspectJ注解的切面进行自动代理 -->	
 	<aop:aspectj-autoproxy />
 	
 	<bean id="sessionFactory"
@@ -27,29 +29,31 @@
 	</bean>
 	
 	
-	<!-- 配置基于注解的声明式事务管理器 -->
-  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+  	<!-- 配置基于注解的声明式事务管理器 -->
+  	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>
         </property>
     </bean>
     
-	<bean id="openSessionInViewInterceptor"  
+    <!-- 使用spring解决延迟加载问题，与web.xml里面的OpenSessionInViewFilter作用完全一样，区别在于一个过滤器一个拦截器。-->
+    <!--<bean id="openSessionInViewInterceptor"  
     	  class="org.springframework.orm.hibernate3.support.OpenSessionInViewInterceptor">  
     		<property name="sessionFactory" ref="sessionFactory" />  
-	</bean>
+	</bean> -->
 	
 	
-	
+	<!--配置JPA数据源 -->	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"       
-        destroy-method="close">       
-	    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />      
-	    <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />      
-	    <property name="username" value="scott" />      
-	    <property name="password" value="ffffff" /> 
+       destroy-method="close">       
+    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />      
+    <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />      
+    <property name="username" value="scott" />      
+    <property name="password" value="ffffff" /> 
 	</bean>   
 	
-<!-- 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> 
+	<!--配置JPA数据源，采用数据池方式 -->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> 
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDrive" /> 
 		<property name="driverClass" value="oracle.jdbc.OracleDrive" />
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl" /> 
@@ -67,5 +71,6 @@
 		<property name="acquireIncrement" value="5"/>	
 		每6000秒检查所有连接池中的空闲连接。Default: 0 
 		<property name="idleConnectionTestPeriod" value="6000"/> 
-	</bean>  -->
+	</bean>-->
+	
 </beans>

@@ -3,7 +3,7 @@
 <html>
   <head>
   	<title>楼宇管理</title>
-  	<!--引入struts标签库-->
+  		<!--引入struts标签库-->
 	<%@taglib prefix="s" uri="/struts-tags"%>
 
 	<!--引入jquery-->
@@ -15,20 +15,23 @@
     <link rel ="stylesheet" type ="text/css" href="/another/plugin/jquery-easyui-1.3.4/themes/icon.css">
     <link rel ="stylesheet" type ="text/css" href="/another/plugin/jquery-easyui-1.3.4/themes/metro/easyui.css">
 
-<!-- 	<script type="text/javascript" src="/another/commonUtil.js"></script> -->
+	<script type="text/javascript" src="/another/commonUtil.js"></script> 
+
   </head>
   
   <body class="easyui-layout" >
     <div id="body" region="center" > 
-<!--  	 查询条件区域 -->
+ 	 <!-- 查询条件区域 -->
 	  <div id="search_area" >
 	    <div id="conditon">
 	      <table border="0">
 	        <tr>
-		      <td>&nbsp;ID：</td>
+		      <td>&nbsp;性别：</td>
 	          <td><input  name="sex" id="sex"  class = "searchCondition" />
-	          <td>&nbsp;Name：</td>
+	          <td>&nbsp;部门：</td>
 	          <td><input  name="department" id="department"   class = "searchCondition"/></td>
+	          <td>用户名：</td>
+	          <td ><input  name="userName" id="userName"    class = "searchCondition"/></td>
 	          <td>
 	              <a  href="javascript:void(0)" class="easyui-linkbutton my-search-button" iconCls="icon-search" plain="true" onclick="retrive()">查询</a> 
 	              <a  href="javascript:void(0)" class="easyui-linkbutton my-search-button" iconCls="icon-reset" plain="true" onclick = "reset()">重置</a>
@@ -38,16 +41,16 @@
 	    </div>
 	    <span id="openOrClose"></span> 
 	  </div>
-<!-- 	  数据表格区域 -->
+	  <!-- 数据表格区域 -->
 	  <table id="tt" style="table-layout:fixed;" ></table>
-<!-- 	  表格顶部工具按钮 -->
+	  <!-- 表格顶部工具按钮 -->
 	  <div id="tt_btn">
 	      <a href="javascript:void(0)"  id="save" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
 	      <a href="javascript:void(0)"  id="update" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a> 
 	      <a href="javascript:void(0)"  id="delete" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 	   </div>
 	   
-	   <div id="dd" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-search'" 
+	    <div id="dd" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true,iconCls:'icon-search'" 
   	     style="width:600px;height:500px;padding:0px;">
   	     <iframe id="frametest" width='99%' height='99%' src=''></iframe>
 	   </div>
@@ -72,11 +75,13 @@
 			showPageList:false,
 			checkbox:true,
 			columns:[[
-// 				{field:'buildingId',title:'buildingId',width:100,halign:"center", align:"left"},
 				{field:'ck',checkbox:'true'},
 				{field:'buildingName',title:'buildingName',width:100,halign:"center", align:"left"},
+				{field:'buildingCode',title:'buildingCode',width:100,halign:"center", align:"left"},
 				{field:'createdStamp',title:'createdStamp',width:60,halign:"center", align:"left"},
-				{field:'createdByUserLogin',title:'createdByUserLogin',width:100,halign:"center", align:"left"}
+				{field:'createdByUserLogin',title:'createdByUserLogin',width:100,halign:"center", align:"left"},
+				{field:'lastUpdatedStamp',title:'lastUpdatedStamp',width:60,halign:"center", align:"left"},
+				{field:'lastModifiedByUserLogin',title:'lastModifiedByUserLogin',width:100,halign:"center", align:"left"}
 			]], 
 			toolbar:'#tt_btn',  
 	        pagination:true,
@@ -86,7 +91,7 @@
 		});
 		
 		//新增弹出框
-/* 		$("#save").on("click", function(){
+		$("#save").on("click", function(){
 			$('#frametest').attr('src','/another/crm/jpaBuildingAction!add.do');
 	        $('#dd').window('open');
 		});
@@ -100,9 +105,7 @@
 		
 		//删除
 		$("#delete").on("click", function(){
-					$('#frametest').attr('src','/another/crm/jpaBuildingAction!add.do');
-	        $('#dd').window('open');
- 			var rows = $('#tt').datagrid('getSelected');
+			var rows = $('#tt').datagrid('getSelected');
 			var dialog = art.dialog({
 			    title: '确认',
 			    content: '您确认删除么？',
@@ -112,8 +115,14 @@
 				    $.ajax({
 						method : "post",
 						dataType : "text",
-						data : rows.buildingId,
-						url : "/another/crm/jpaBuildingAction!del.do"
+						data : {
+							buildingId :rows.buildingId
+						},
+						url : "/another/crm/jpaBuildingAction!del.do",
+						success : function(){
+							retrive();
+							dalert("删除成功！");
+						}
 					});
 			    },okVal: '确定',
 			      cancelVal: '关闭',
@@ -122,6 +131,9 @@
 			    resize:true
 			}); 
 		});
+		
+		
+	});
 	
 	function viewDetail(id){
 		$('#frametest').attr('src',"/another/crm/jpaBuildingAction.do?action=detail&buildingId="+id);
@@ -132,6 +144,7 @@
 	window.onresize = function(){
 		setTimeout(domresize,300);
 	};
+	
 	//改变表格宽高
 	function domresize(){
 		$('#tt').datagrid('resize',{  
@@ -156,6 +169,5 @@
 	function reset(){
 		$(".searchCondition").val("");
 	}
-	 */
   </script>
 </html>

@@ -11,6 +11,26 @@ function dalert(content, callback) {
 	}).time(2);
 }
 
+/*function dcomfirm(content,data,doAct,cancelAct){
+	art.dialog({
+	    title: 'Confirm',
+	    content: content,
+	    icon: 'confirm',
+//	    follow: document.getElementById('btn2'),
+	    ok: function(){
+	    	method : "post",
+	    	data : data,
+	    	datatype : "text",
+	    	url : doAct
+	    },okVal: 'OK',
+	      cancelVal: 'Cancel',
+	    cancel: function(){
+//	   	console.log(123);
+	    },fixed:true,
+	    resize:true
+	});
+}
+
 function yalert(content, callback) {
 	top.artDialog({
 		id : 'Info',
@@ -22,7 +42,7 @@ function yalert(content, callback) {
 		lock : true,
 		close : callback
 	});
-}
+}*/
 
 
 function openWindowWithPost(url, name, keys, values) {

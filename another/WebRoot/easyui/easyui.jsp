@@ -105,6 +105,12 @@
 				"url": "/another/easyui/easyUiUserAction.do"
 			},
 			{
+				"menuid": "142",
+				"menuname": "easyuigrid",
+				"icon": "icon-role",
+				"url": "/another/easyui/easyUiUserAction!demogrid.do"
+			},
+			{
 				"menuid": "151",
 				"menuname": "小区楼宇",
 				"icon": "icon-set",

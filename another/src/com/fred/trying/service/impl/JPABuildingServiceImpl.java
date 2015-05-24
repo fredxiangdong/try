@@ -66,5 +66,14 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 		return building;
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED ,readOnly = false)
+	public void delById(String buildingId) {
+		em.remove(em.find(JPACommunityBuilding.class, buildingId));
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED ,readOnly = false)
+	public JPACommunityBuilding retriveById(String buildingId) {
+		return em.find(JPACommunityBuilding.class, buildingId);
+	}
 
 }

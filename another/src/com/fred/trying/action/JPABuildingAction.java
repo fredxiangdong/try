@@ -1,5 +1,7 @@
 package com.fred.trying.action;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,16 +14,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fred.trying.entity.JPACommunityBuilding;
 import com.fred.trying.service.JPABuildingService;
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Namespace("/crm")
 @ParentPackage("json-default")
 @Action(value="jpaBuildingAction")
 @Results({
-	@Result(name = "input", location = "jpabuilding.jsp"),
+	@Result(name = "input", location = "buildjpa.jsp"),
 	@Result(name = "add", location = "addbuilding.jsp"),
 	@Result(name = "jsondata",type ="json",params = {"includeproperties","rows.*,total"}),
-	@Result(name = "addbck",type = "json", params = {"includeproperties","genedID"})
+	@Result(name = "addbck",type = "json", params = {"includeproperties","buildingId"}),
 })
 
 public class JPABuildingAction extends ActionSupport{
@@ -35,14 +38,27 @@ public class JPABuildingAction extends ActionSupport{
 	
 	private JPACommunityBuilding building;
 	
-	private String genedID;
+	private String buildingId;
 	
 	private String total = "0";
+	
+	private String action;
+	
+	private String buildingStr;
 	 
 	 @Override
 	public String execute(){ 
-		return INPUT;
+		if("detail".equals(action)){
+			this.detail();
+			return "add";
+		}else{
+			return INPUT;
+		} 
 	}
+	 
+	 public void detail(){
+		 building = buildingService.retriveById(buildingId);
+	 }
 	 
 	public String retrive(){
 		rows = buildingService.retriveAll();
@@ -52,15 +68,24 @@ public class JPABuildingAction extends ActionSupport{
 	
 	public String add(){
 		building = new JPACommunityBuilding();
-		building.setBuildingName("2");
-		building.setBuildingCode("100");
 		return "add";
 	}
 
 	public String save(){
+		try {
+			buildingStr =URLDecoder.decode(buildingStr,"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		Gson gson = new Gson();
+		building = gson.fromJson(buildingStr,JPACommunityBuilding.class);
 		building = buildingService.save(building);
-		genedID = building.getBuildingId();
+		buildingId = building.getBuildingId();
 		return "addbck";
+	}
+	
+	public void del(){
+		buildingService.delById(buildingId);
 	}
 	
 	public List<JPACommunityBuilding> getRows() {
@@ -87,12 +112,29 @@ public class JPABuildingAction extends ActionSupport{
 		this.building = building;
 	}
 
-	public String getGenedID() {
-		return genedID;
+	public String getBuildingId() {
+		return buildingId;
 	}
 
-	public void setGenedID(String genedID) {
-		this.genedID = genedID;
+	public void setBuildingId(String buildingId) {
+		this.buildingId = buildingId;
 	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public String getBuildingStr() {
+		return buildingStr;
+	}
+
+	public void setBuildingStr(String buildingStr) {
+		this.buildingStr = buildingStr;
+	}
+
 	
 }

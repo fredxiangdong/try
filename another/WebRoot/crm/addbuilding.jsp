@@ -7,7 +7,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    
     <title>添加楼宇</title>
     <%@include file="../../pageset.jspa" %>
   </head>
@@ -39,9 +38,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<td>remark:</td>
 	    			<td><s:textfield name ="building.remark" id ="remark"></s:textfield></td>
 	    		</tr>
-	    			<s:hidden id="buildingId" property = "building.buildingId"/>
+	    			<s:hidden id="buildingId" name = "building.buildingId"/>
 	    	</table>
-<!-- 	    </form> -->
+	    </form>
 	    </div>
 	    
 	    <div style="text-align:center;padding:5px">
@@ -53,30 +52,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 </body>
   <script type ="text/javascript">
-		function subdata(){
+	function subdata(){
+		var buildingName = encodeURI($('#buildingName').val().trim());
+		var buildingCode = encodeURI($('#buildingCode').val().trim());
+		var remark = encodeURI($('#remark').val().trim());
+		var buildingId = $('#buildingId').val();
+
+ 		var building = "{'buildingName' :'"+ buildingName +"','buildingCode':'"
+		+buildingCode+"','remark':'"+remark+"','buildingId':'"+buildingId+"'}"; 
+/* 		var building = "{\"buildingName\" :\""+ buildingName +"\",\"buildingCode\":\""
+		+buildingCode+"\",\"remark\":\""+remark+"\",\"buildingId\":\""+buildingId+"\"}"; */
+		alert(building);
  			$.ajax({
 				method : "post",
 				dataType:"text",
- 				data :{
-					"building.buildingName" : $("#buildingName").val().trim(), 
-					"building.buildingCode":$("#buildingCode").val().trim(),  
-		    		"building.remark":$("#remark").val().trim(),  
-		    		"building.buildingId":$("#buildingId").val().trim()  
-				}, 
-				url : "/another/crm/jpaBuildingAction!save.do",
+ 				data : {buildingStr : building},
+				url : "/another/crm/jpaBuildingAction!save.do", 
 				success : function(data){
-				var result = $.parseJSON(data);
-				alert(result.genedID);
-					$("#buildingId").val(result.genedID);
-// 					saveCalBck();
+					var result = $.parseJSON(data);
+					$("#buildingId").val(result.buildingId);
 				}
 			}); 
-// 			$('#ff').form('submit');
+// 			$('#ff').form('submit');  //对象。form.('submit')方式提交中文无乱码，但form方式提交无返回
+
 		}
 		
 		
 		function saveCalBck(){
-		alert(1);
 /* 			alert(data);
 			$("#buildingId").val(data); */
 			dalert("提交成功");
