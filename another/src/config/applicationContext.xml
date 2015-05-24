@@ -21,16 +21,18 @@
 	<!--对@AspectJ注解的切面进行自动代理 -->	
 	<aop:aspectj-autoproxy />
 	
+	<!--sessionFactory配置 -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="configLocation"
-			value="classpath:hibernate.cfg.xml">
+			value="classpath:config/hibernate.cfg.xml">
 		</property>
 	</bean>
 	
 	
   	<!-- 配置基于注解的声明式事务管理器 -->
-  	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+  	<bean id="transactionManager" 
+  		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>
         </property>
@@ -50,10 +52,10 @@
     <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />      
     <property name="username" value="scott" />      
     <property name="password" value="ffffff" /> 
-	</bean>   
+	</bean>
 	
 	<!--配置JPA数据源，采用数据池方式 -->
-    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> 
+	<!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"> 
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDrive" /> 
 		<property name="driverClass" value="oracle.jdbc.OracleDrive" />
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl" /> 
@@ -71,6 +73,6 @@
 		<property name="acquireIncrement" value="5"/>	
 		每6000秒检查所有连接池中的空闲连接。Default: 0 
 		<property name="idleConnectionTestPeriod" value="6000"/> 
-	</bean>-->
+	</bean> -->
 	
 </beans>

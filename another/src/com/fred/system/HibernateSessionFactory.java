@@ -1,4 +1,4 @@
-package com.fred.hibernate;
+package com.fred.system;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

@@ -1,6 +1,5 @@
 package com.fred.thread;
 
-import java.io.IOException;
 
 //多线程编程
 public class MultiThread    

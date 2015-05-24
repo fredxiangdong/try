@@ -6,7 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
-import com.fred.hibernate.HibernateSessionFactory;
+import com.fred.system.HibernateSessionFactory;
 import com.fred.trying.entity.CrmCommunityBuilding;
 import com.fred.trying.service.BuildingService;
 

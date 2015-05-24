@@ -10,8 +10,8 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.fred.common.UUIDGenerator;
-import com.fred.hibernate.HibernateSessionFactory;
 import com.fred.stock.entity.StockType;
+import com.fred.system.HibernateSessionFactory;
 
 public class ReadTxtFile {
 	

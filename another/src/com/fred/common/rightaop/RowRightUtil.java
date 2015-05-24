@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.fred.common.entity.EntityBean;
 import com.fred.common.sysmodel.QueryParamList;
-import com.fred.hibernate.HibernateSessionFactory;
+import com.fred.system.HibernateSessionFactory;
 
 public class RowRightUtil {
 

@@ -6,10 +6,10 @@ import java.util.List;
 import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 
-import com.fred.hibernate.HibernateSessionFactory;
 import com.fred.stock.entity.StockData;
 import com.fred.stock.entity.StockType;
 import com.fred.stock.service.RetriveStockDataService;
+import com.fred.system.HibernateSessionFactory;
 
 @Component("retriveStockDataService")
 public class RetriveStockDataServiceImpl implements RetriveStockDataService{
