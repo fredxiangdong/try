@@ -5,6 +5,36 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	
+	<!-- authority filter 最好加在Struts2的Filter前面-->  
+ <!--  <filter>  
+    <filter-name>SessionInvalidate</filter-name>  
+    <filter-class>com.fred.system.SessionCheckFilter</filter-class>  
+    <init-param>  
+      <param-name>checkSessionKey</param-name>  
+      <param-value>loginName</param-value>  
+    </init-param>  
+    <init-param>  
+      <param-name>redirectURL</param-name>  
+      <param-value>/entpLogin.jsp</param-value>  
+    </init-param>  
+    <init-param>  
+      <param-name>notCheckURLList</param-name>  
+      <param-value>/entpLogin.jsp,/rois/loginEntp.action,/entpRegister.jsp,/test.jsp,/rois/registerEntp.action</param-value>  
+    </init-param>  
+  </filter>  
+  
+  过滤/rois命名空间下所有action   
+  <filter-mapping>  
+    <filter-name>SessionInvalidate</filter-name>  
+    <url-pattern>*.do</url-pattern>  
+  </filter-mapping>  
+  
+  过滤/jsp文件夹下所有jsp   
+  <filter-mapping>  
+    <filter-name>SessionInvalidate</filter-name>  
+    <url-pattern>/*</url-pattern>  
+  </filter-mapping> 
+	 -->
  	<!-- 著名 Character Encoding filter -->
 	<filter>  
        <filter-name>encodingFilter</filter-name>  
@@ -24,51 +54,6 @@
        <filter-name>encodingFilter</filter-name>  
        <url-pattern>/*</url-pattern>  
    </filter-mapping>
-  
-  
-  	<!-- authority filter 最好加在Struts2的Filter前面-->  
-<filter>  
-    <filter-name>SessionInvalidate</filter-name>  
-    <filter-class>com.fred.system.SessionCheckFilter</filter-class>  
-    <init-param>  
-      <param-name>checkSessionKey</param-name>  
-      <param-value>user</param-value>  
-    </init-param>  
-    <init-param>  
-      <param-name>redirectURL</param-name>  
-      <param-value>/login.jsp</param-value>  
-    </init-param>  
-    <init-param>  
-      <param-name>notCheckURLList</param-name>  
-      <param-value>/login.jsp</param-value>  
-    </init-param>  
-  </filter>  
- 
-	<!--过滤.do结尾的action-->
-  <filter-mapping>  
-    <filter-name>SessionInvalidate</filter-name>  
-    <url-pattern>*.do</url-pattern>  
-  </filter-mapping>  
-  
-	<!--url-pattern设定为/*时，会过滤根目录下所有东西，导致login.jsp加载图片失败  -->
-	<!--<filter-mapping>  
-	    <filter-name>SessionInvalidate</filter-name>  
-	    <url-pattern>/*</url-pattern>  
-	 </filter-mapping> --> 
-  
-  
-  	<!--StrutsPrepareAndExecuteFilter是自2.1.3开始就替代了FilterDispatcher，是Struts的核心过滤器-->
-	<filter>
-		<filter-name>struts2</filter-name>
-		<filter-class>
-			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
-		</filter-class>
-	</filter>
-	
-	<filter-mapping>
-		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
   
   	<!-- 使用spring解决延迟加载问题，针对hibernate等用session的方式 -->
 	<!-- 必须放在struts2的配置之前，因为Filter是从上向下过滤的 -->
@@ -105,16 +90,26 @@
         <url-pattern>/*</url-pattern>  
     </filter-mapping>
 
+	<!--StrutsPrepareAndExecuteFilter是自2.1.3开始就替代了FilterDispatcher，是Struts的核心过滤器-->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+		</filter-class>
+	</filter>
 	
-
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> 
   
 	<!--Spring需要加载的xml文件，若没有配置，则加载默认的/WEB-INF/applicationContext.xml-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath:applicationContext.xml,
-			classpath:applicationPath.xml,
-			classpath:jpaContext.xml
+			classpath:config/applicationContext.xml,
+			classpath:config/applicationPath.xml,
+			classpath:config/jpaContext.xml
 		</param-value> 
 	</context-param>
 
@@ -128,7 +123,7 @@
 	<!--log4j配置信息 -->
    	<context-param>  
         <param-name>log4jConfigLocation</param-name>   
-        <param-value>classpath:log4j.properties</param-value>   
+        <param-value>classpath:config/log4j.properties</param-value>   
     </context-param>  
     <context-param>   
         <param-name>log4jRefreshInterval</param-name>   
@@ -150,7 +145,12 @@
 	<!-- welcome-file子元素用于指定默认文件的名称。welcome-file-list元素可以包含一个或多个welcome-file子元素。-->
 	<!-- 如果在第一个welcome-file元素中没有找到指定的文件，Web容器就会尝试显示第二个，以此类推。-->
     <welcome-file-list>
-	    <welcome-file>/login.jsp</welcome-file>
+	    <welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
   
+  
+<!--   <context-param> -->
+<!-- <param-name>webAppRootKey</param-name> -->
+<!-- <param-value> app.root </param-value> -->
+<!-- </context-param> -->
 </web-app>

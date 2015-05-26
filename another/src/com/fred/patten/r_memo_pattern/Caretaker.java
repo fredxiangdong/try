@@ -12,5 +12,4 @@ public class Caretaker {
 		this.memo = memo;
 	}
 	
-	
 }

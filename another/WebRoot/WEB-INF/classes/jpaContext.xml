@@ -20,7 +20,7 @@
 	<!-- default EntityManager Configuration --> 
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"> 
 		<property name="dataSource" ref="dataSource" /> 
-		<property name="persistenceXmlLocation" value="classpath:config/persistence.xml" /> 
+		<property name="persistenceXmlLocation" value="classpath:persistence.xml" /> 
 		<property name="jpaPropertyMap"> 
 			<props> 
 			<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop> 

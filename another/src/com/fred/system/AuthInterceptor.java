@@ -6,21 +6,23 @@ import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
+
 public class AuthInterceptor extends AbstractInterceptor {  
 	
   private static final long serialVersionUID = -5114658085937727056L;  
   private String sessionKey="loginName";  
   private String parmKey="withoutAuthentication";  
   private boolean excluded;  
+  
   @Override  
   public String intercept(ActionInvocation invocation) throws Exception {  
       
-    ActionContext ac=invocation.getInvocationContext();  
+    ActionContext ac = invocation.getInvocationContext();  
     Map<?, ?> session =ac.getSession();  
     String parm=(String) ac.getParameters().get(parmKey);  
-      
+      System.out.println("test interceptor");
     if(parm!=null){  
-      excluded=parm.toUpperCase().equals("TRUE");  
+      excluded = parm.toUpperCase().equals("TRUE");  
     }  
       
     String user=(String)session.get(sessionKey);  
