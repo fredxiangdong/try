@@ -7,7 +7,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import com.fred.common.entity.AuditEntityBean;
-import com.fred.trying.entity.User;
+import com.fred.trying.entity.TbUser;
 import com.opensymphony.xwork2.ActionContext;
 
 public class EntityListener {
@@ -15,7 +15,7 @@ public class EntityListener {
 	private String getUser()
 	  {
 		Map session = ActionContext.getContext().getSession();
-		User user = (User)session.get("user");
+		TbUser user = (TbUser)session.get("user");
 		if(user == null) return "no user";//加拦截器之后其实不必要
 		return user.getUserName();
 	  }

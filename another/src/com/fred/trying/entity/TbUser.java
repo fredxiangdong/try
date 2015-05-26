@@ -2,14 +2,30 @@ package com.fred.trying.entity;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name ="TB_USER")
+public class TbUser implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@Column(name ="USER_ID")
 	private String userId;
+	@Column(name ="USER_NAME")
 	private String userName;
+	@Column(name ="REAL_NAME")
 	private String name;
+	@Column(name ="SEX")
 	private String sex;
+	@Column(name ="DEPARTMENT")
 	private String department;
+	@Column(name ="PASSWORD")
+	private String password;
 	public String getUserId() {
 		return userId;
 	}
@@ -41,9 +57,16 @@ public class User implements Serializable{
 		this.department = department;
 	}
 
-	public User(){}
+	public String getPassword() {
+		return password;
+	}
 	
-	public User(String userId,String userName,String name,String sex,String department){
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public TbUser(){}
+	
+	public TbUser(String userId,String userName,String name,String sex,String department){
 		this.userId = userId;
 		this.userName = userName;
 		this.name = name;

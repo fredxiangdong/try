@@ -3,6 +3,7 @@
 <html>
 <title>个人实验平台</title>
 <style type="text/css">
+
 body {
 	margin-left: 0px;
 	margin-top: 0px;
@@ -14,14 +15,18 @@ body {
 .STYLE4 {
 	color: #42870a;
 	font-size: 12px;
-}
+} 
 </style>
-<%@taglib prefix="s" uri="/struts-tags"%>
+
+<%@include file="pageset.jspa" %>
+
 </head>
 
 <body>
-<form id = "loginform" method = "post" action = "crm/loginAction.do">
-<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+
+
+<form name="loginForm"  method="post"  action="/another/easyui/loginAction.do">
+  <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td bgcolor="#e5f6cf">&nbsp;</td>
   </tr>
@@ -37,17 +42,15 @@ body {
             <td width="183" background="/another/images/login_07.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="21%" height="30"><div align="center"><span class="STYLE3">用户名</span></div></td>
-<!--                 <td width="79%" height="30"><input type="text" name="textfield"  style="height:18px; width:130px; border:solid 1px #cadcb2; font-size:12px; color:#81b432;"></td> -->
-              <td width="79%" height="30"><s:textfield name = "username" ></td>
+              <td width="79%" height="30"><s:textfield name = "username" ></s:textfield></td>
               </tr>
               <tr>
                 <td height="30"><div align="center"><span class="STYLE3">密码</span></div></td>
-                <td height="30"><s:textfield name="password" ></td>
-<!--                   <td height="30"><input type="password" name="textfield2"  style="height:18px; width:130px; border:solid 1px #cadcb2; font-size:12px; color:#81b432;"></td> -->
+                <td height="30"><s:textfield name="password" ></s:textfield></td>
               </tr>
               <tr>
-				<td height="30"><input type = "button" value ="登录" onclick = "login()"></td>
-				<td height="30"><input type = "button" value ="重置"></td>
+				<td height="30"><input type="submit" value="登录" ></td>
+				<td height="30"><input type="reset" value="重置" ></td>
               </tr>
             </table></td>
             <td width="255" background="/another/images/login_08.gif">&nbsp;</td>
@@ -83,10 +86,4 @@ body {
 
 </body>
 
-<script type ="text/javascript">
-	function login(){
-		alert(1);
-		$("#loginform").form("submit");
-	}
-</script>
 </html>

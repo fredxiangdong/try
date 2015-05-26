@@ -37,7 +37,6 @@ public class SessionCheckFilter implements Filter {
     HttpServletRequest request = (HttpServletRequest) servletRequest;  
     HttpServletResponse response = (HttpServletResponse) servletResponse;  
     HttpSession session = request.getSession();  
-    System.out.println("test authFilter");
     if (sessionKey == null) {  
       filterChain.doFilter(request, response);  
       return;  
@@ -55,7 +54,6 @@ public class SessionCheckFilter implements Filter {
         + (request.getPathInfo() == null ? "" : request.getPathInfo());  
     String temp = request.getRequestURI();  
     temp = temp.substring(request.getContextPath().length() + 1);  
-    // System.out.println("ÊÇ·ñ°üÀ¨£º"+uri+";"+notCheckURLList+"=="+notCheckURLList.contains(uri));  
     return notCheckURLList.contains(uri);  
   }  
   
@@ -64,8 +62,7 @@ public class SessionCheckFilter implements Filter {
     this.filterConfig = filterConfig;  
     redirectURL = filterConfig.getInitParameter("redirectURL");  
     sessionKey = filterConfig.getInitParameter("checkSessionKey");  
-    String notCheckURLListStr = filterConfig  
-        .getInitParameter("notCheckURLList");  
+    String notCheckURLListStr = filterConfig.getInitParameter("notCheckURLList");  
     if (notCheckURLListStr != null) {  
       System.out.println(notCheckURLListStr);  
       String[] params = notCheckURLListStr.split(",");  

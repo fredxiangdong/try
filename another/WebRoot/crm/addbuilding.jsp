@@ -8,7 +8,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <title>添加楼宇</title>
-    <%@include file="../../pageset.jspa" %>
+<!--     <%@include file="../../pageset.jspa" %> -->
+	<%@include file= %>
   </head>
   
 <body align="center">

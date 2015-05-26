@@ -27,7 +27,7 @@
   
   
   	<!-- authority filter 最好加在Struts2的Filter前面-->  
-<filter>  
+ <filter>  
     <filter-name>SessionInvalidate</filter-name>  
     <filter-class>com.fred.system.SessionCheckFilter</filter-class>  
     <init-param>  
@@ -40,11 +40,11 @@
     </init-param>  
     <init-param>  
       <param-name>notCheckURLList</param-name>  
-      <param-value>/login.jsp</param-value>  
+      <param-value>/login.jsp,/easyui/loginAction.do</param-value>  
     </init-param>  
   </filter>  
  
-	<!--过滤.do结尾的action-->
+<!-- 	过滤.do结尾的action -->
   <filter-mapping>  
     <filter-name>SessionInvalidate</filter-name>  
     <url-pattern>*.do</url-pattern>  

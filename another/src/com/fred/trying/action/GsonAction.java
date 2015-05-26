@@ -17,7 +17,7 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.apache.struts2.json.annotations.JSON;
 
-import com.fred.trying.entity.User;
+import com.fred.trying.entity.TbUser;
 import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -33,7 +33,7 @@ public class GsonAction extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
 	
-	List<User> rows = new ArrayList<User>();
+	List<TbUser> rows = new ArrayList<TbUser>();
 	private String total ="2";
 	private String gsonStr = "{\"userId\":\"1\",\"userName\":\"追梦\",\"name\":\"易木\",\"sex\":\"男\",\"department\":\"南京\"}";
 	HttpServletResponse response = (HttpServletResponse) ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
@@ -43,8 +43,8 @@ public class GsonAction extends ActionSupport{
 	}
 	
 	public String testGson(){
-		User u1 = new User("1","追梦","易木","男","南京");
-		User u2 = new User("2","有时","东方","男","烟台");
+		TbUser u1 = new TbUser("1","追梦","易木","男","南京");
+		TbUser u2 = new TbUser("2","有时","东方","男","烟台");
 		rows.add(u1);
 		rows.add(u2);
 		
@@ -62,7 +62,7 @@ public class GsonAction extends ActionSupport{
 	
 	public void testGson2(){
 		response.setCharacterEncoding("UTF-8");
-		User u1 = new User("2","有时","东方","男","烟台");
+		TbUser u1 = new TbUser("2","有时","东方","男","烟台");
 		Gson gson = new Gson();
 		gsonStr = gson.toJson(u1);
 //		String gsonStr2 = gson.toJson(gsonStr);
@@ -81,7 +81,7 @@ public class GsonAction extends ActionSupport{
 		response.setCharacterEncoding("UTF-8");
 		System.out.println(gsonStr);
 		Gson gson = new Gson();
-		User u = gson.fromJson(gsonStr, User.class);
+		TbUser u = gson.fromJson(gsonStr, TbUser.class);
 		System.out.println(u.getUserName());
 		try {
 			PrintWriter out = response.getWriter();
@@ -125,11 +125,11 @@ public class GsonAction extends ActionSupport{
 		this.gsonStr = gsonStr;
 	}
 
-	public List<User> getRows() {
+	public List<TbUser> getRows() {
 		return rows;
 	}
 
-	public void setRows(List<User> rows) {
+	public void setRows(List<TbUser> rows) {
 		this.rows = rows;
 	}
 

@@ -332,9 +332,9 @@
 
             $('#loginOut').click(function() {
                 $.messager.confirm('系统提示', '您确定要退出本次登录吗?', function(r) {
-
                     if (r) {
-                        location.href = '/ajax/loginout.ashx';
+                        location.href = '/another/easyui/loginAction!loginout.do';
+                        dalert("已安全退出本系统，谢谢使用！");
                     }
                 });
             });
