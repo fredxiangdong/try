@@ -64,7 +64,6 @@ public class SessionCheckFilter implements Filter {
     sessionKey = filterConfig.getInitParameter("checkSessionKey");  
     String notCheckURLListStr = filterConfig.getInitParameter("notCheckURLList");  
     if (notCheckURLListStr != null) {  
-      System.out.println(notCheckURLListStr);  
       String[] params = notCheckURLListStr.split(",");  
       for (int i = 0; i < params.length; i++) {  
         notCheckURLList.add(params[i].trim());  

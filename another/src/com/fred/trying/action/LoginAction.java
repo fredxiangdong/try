@@ -19,7 +19,8 @@ import com.opensymphony.xwork2.ActionSupport;
 @Action(value ="loginAction")
 @Results({
 	@Result(name ="input", location ="easyui.jsp"),
-	@Result(name ="login", location ="/login.jsp")
+	@Result(name ="login", location ="/login.jsp"),
+	@Result(name ="out", location ="/loginout.jsp")
 	})
 public class LoginAction extends ActionSupport{
 
@@ -55,8 +56,9 @@ public class LoginAction extends ActionSupport{
 		}
 	}
 	
-	public void loginout(){
+	public String loginout(){
 		session.remove("user");
+		return "out";
 	}
 	
 	public String getUsername() {
