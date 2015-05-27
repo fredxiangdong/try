@@ -8,9 +8,12 @@ import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ParamDef;
 
+
 @MappedSuperclass
-@FilterDef(name = "RIGHT_ID", parameters = @ParamDef(name = "RIGHT_ID", type = "string"))
-@Filters(@Filter(condition = "UNIT_CODE in(:RIGHT_ID)", name = "RIGHT_ID"))
+@FilterDef(name = "rightFilter", parameters = @ParamDef(name = "RIGHT_ID", type = "string"))
+@Filters({
+		@Filter(name = "rightFilter",condition = " UNIT_CODE in(:RIGHT_ID)" )
+})
 public class AuditEntityBean extends EntityBean{
 	
 	private static final long serialVersionUID = 1L;

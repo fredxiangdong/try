@@ -74,6 +74,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ckeditor/ckeditor-java-core-3.5.3-sources.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ckeditor/ckeditor-java-core-3.5.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/ojdbc14-10.2.0.4.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>

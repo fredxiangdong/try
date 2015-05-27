@@ -26,6 +26,8 @@ public class TbUser implements Serializable{
 	private String department;
 	@Column(name ="PASSWORD")
 	private String password;
+	@Column(name = "UNIT_CODE")
+	private String unitCode;
 	public String getUserId() {
 		return userId;
 	}
@@ -63,6 +65,13 @@ public class TbUser implements Serializable{
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getUnitCode() {
+		return unitCode;
+	}
+	public void setUnitCode(String unitCode) {
+		this.unitCode = unitCode;
 	}
 	public TbUser(){}
 	

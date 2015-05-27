@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.hibernate.Filter;
+import org.hibernate.Session;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fred.common.HyCommonUtil;
 import com.fred.common.UUIDGenerator;
 import com.fred.trying.entity.JPACommunityBuilding;
+import com.fred.trying.entity.TbUser;
 import com.fred.trying.service.JPABuildingService;
+import com.opensymphony.xwork2.ActionContext;
 
 @Component("jPABuildingService")
 public class JPABuildingServiceImpl implements JPABuildingService {
@@ -38,16 +42,39 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 
 
 //	@SuppressWarnings("all")
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
 	public List<JPACommunityBuilding> retriveAll() {
 		  String jpql = "select build from JPACommunityBuilding build where 1=1";
+//		  List<JPACommunityBuilding> buildLs = doRetriveFliter(jpql);
+		  //采用hibernate的@Filter方式进行数据过滤
+		  List<JPACommunityBuilding> buildLs = doRetriveAop(jpql);
+		  //采用spring的AOP切面方式进行数据过滤
+		  return buildLs;
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
+	public List<JPACommunityBuilding> doRetriveAop(String jpql){
+		List resultLs = new ArrayList<JPACommunityBuilding>();
+		
+		return resultLs;
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
+	public List<JPACommunityBuilding> doRetriveFliter(String jpql){
 		  List<JPACommunityBuilding> buildLs = new ArrayList<JPACommunityBuilding>();
+		  TbUser user = (TbUser)ActionContext.getContext().getSession().get("user");
 		  try{
+			  //方法上要有@Transactional注解，否则会报session is close异常
+			  Session session = (Session)em.getDelegate();
+			  //这种方式从entitymanager中得到Session，继而使用session.enableFilter,从而达到过滤数据目的。
+			  Filter filter = session.enableFilter("rightFilter");;
+			  filter.setParameter("RIGHT_ID", user.getUnitCode());
 			  Query query = em.createQuery(jpql);
 			  buildLs = query.getResultList();
 		  }catch(Exception e){
 			  e.printStackTrace();
 		  }
-			return buildLs;
+		  return buildLs;
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED,readOnly=false)

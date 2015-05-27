@@ -16,12 +16,7 @@ public class RightAop {
 	/**
 	 * Load pointcut.
 	 */
-	@Pointcut("execution (public * com.haiyisoft."
-			+"ep.common.jpa.dao.IDAO.load(Class , "
-			+"com.haiyisoft.ep.common.model.QueryParamList ,"
-			+"String , com.haiyisoft.ep.common.model.QueryParamList ,"
-			+"com.haiyisoft.ep.common.model.SortParamList ,"
-			+"com.hisyisoft.ep.common.model.PageInfo ))")
+	@Pointcut("execution (public * com.fred.trying.service.impl.JPABuildingServiceImpl.doRetriveAop(..))")
 	public void loadPointcut(){}
 	
 	

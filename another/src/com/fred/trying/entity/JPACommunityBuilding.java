@@ -6,6 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.ParamDef;
+
 import com.fred.common.entity.AuditEntityBean;
 /**
  * 
@@ -20,6 +25,11 @@ import com.fred.common.entity.AuditEntityBean;
  */
 @Entity
 @Table(name = "CRM_COMMUNITY_BUILDING")
+@FilterDef(name = "rightFilter", parameters = @ParamDef(name = "RIGHT_ID", type = "string"))
+@Filters({
+		@Filter(name = "rightFilter",condition = " UNIT_CODE in(:RIGHT_ID)" )
+})
+
 public class JPACommunityBuilding extends AuditEntityBean{
 
 	private static final long serialVersionUID = 1L;

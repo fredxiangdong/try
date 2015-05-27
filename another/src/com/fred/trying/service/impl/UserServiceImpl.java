@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
 
-import com.fred.system.EntityManagerUtil;
 import com.fred.trying.entity.TbUser;
 import com.fred.trying.service.UserService;
 
