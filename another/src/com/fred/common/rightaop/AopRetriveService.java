@@ -1,4 +1,4 @@
-package com.fred.common;
+package com.fred.common.rightaop;
 
 import java.util.List;
 

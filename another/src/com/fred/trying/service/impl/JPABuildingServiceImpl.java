@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fred.common.AopRetriveService;
 import com.fred.common.HyCommonUtil;
 import com.fred.common.UUIDGenerator;
+import com.fred.common.rightaop.AopRetriveService;
 import com.fred.trying.entity.JPACommunityBuilding;
 import com.fred.trying.entity.TbUser;
 import com.fred.trying.service.JPABuildingService;

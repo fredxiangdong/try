@@ -23,7 +23,7 @@ public class RightAop {
 	@PersistenceContext(unitName="ebwebPU")
 	private EntityManager em;
 
-	@Pointcut("execution (public * com.fred.common.AopRetriveServiceImpl.doRetrive(..))")
+	@Pointcut("execution (public * com.fred.common.rightaop.AopRetriveServiceImpl.doRetrive(..))")
 	public void loadPointcut(){}
 	
 	@Around("loadPointcut()")
