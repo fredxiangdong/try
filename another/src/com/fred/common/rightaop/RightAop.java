@@ -1,39 +1,43 @@
 package com.fred.common.rightaop;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
-import com.fred.common.entity.EntityBean;
-import com.fred.common.sysmodel.QueryParamList;
+import com.fred.trying.entity.TbUser;
+import com.opensymphony.xwork2.ActionContext;
 
-/*@Aspect
-@Component*/
+@Aspect
+@Component
 public class RightAop {
 	
 	/**
 	 * Load pointcut.
 	 */
-	@Pointcut("execution (public * com.fred.trying.service.impl.JPABuildingServiceImpl.doRetriveAop(..))")
+	@PersistenceContext(unitName="ebwebPU")
+	private EntityManager em;
+
+	@Pointcut("execution (public * com.fred.common.AopRetriveServiceImpl.doRetrive(..))")
 	public void loadPointcut(){}
-	
 	
 	@Around("loadPointcut()")
 	public Object anyMethod(ProceedingJoinPoint pjp){
+		TbUser user = (TbUser)ActionContext.getContext().getSession().get("user");
 		Object retVal = null;
 		Object[] args = pjp.getArgs();
-		@SuppressWarnings("unchecked")
-		Class<? extends EntityBean> clazz = (Class<? extends EntityBean>)args[0];
-		if (EntityBean.class.isAssignableFrom(clazz)){
-			String extJpql = (String) args[2];
-			QueryParamList extParams = (QueryParamList) args[3];
-			if (extParams == null)
-				extParams = new QueryParamList();
-			extJpql = RowRightUtil.getRight(RightItemCodeUtil.getRightItemCode(), clazz, extJpql, extParams);
-			args[2] = extJpql;
-			args[3] = extParams;
+		args[0] = args[0] + " and unitCode =:unitCode ";
+		try{
+			Query query = em.createQuery(args[0].toString());
+			query.setParameter("unitCode", user.getUnitCode());
+			args[1] = query;
+		}catch (Exception e){
+			e.printStackTrace();
 		}
 		try {
 			retVal = pjp.proceed(args);

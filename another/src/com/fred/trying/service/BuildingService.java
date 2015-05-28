@@ -3,6 +3,7 @@ package com.fred.trying.service;
 import java.util.List;
 
 import com.fred.trying.entity.CrmCommunityBuilding;
+import com.fred.trying.entity.JPACommunityBuilding;
 
 public interface BuildingService {
 	/**
@@ -16,4 +17,5 @@ public interface BuildingService {
 	 * @param Id
 	 */
 	public void remove(String Id);
+	
 }

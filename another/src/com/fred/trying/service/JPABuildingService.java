@@ -10,7 +10,7 @@ public interface JPABuildingService {
 	 * 查询全部信息
 	 * @return
 	 */
-	public List<JPACommunityBuilding> retriveAll();
+	public List<JPACommunityBuilding> retriveAll(String test,int test2);
 	
 	/**
 	 * 删除
@@ -35,4 +35,7 @@ public interface JPABuildingService {
 	 * @param buildingId
 	 */
 	public JPACommunityBuilding retriveById(String buildingId);
+	
+	public List<JPACommunityBuilding> doRetriveAop(String jpql);
+	
 }

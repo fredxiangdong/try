@@ -9,10 +9,12 @@ import javax.persistence.Query;
 
 import org.hibernate.Filter;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fred.common.AopRetriveService;
 import com.fred.common.HyCommonUtil;
 import com.fred.common.UUIDGenerator;
 import com.fred.trying.entity.JPACommunityBuilding;
@@ -25,6 +27,13 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 
 	@PersistenceContext(unitName="ebwebPU")
 	private EntityManager em;
+	
+	@Autowired
+	private AopRetriveService aopRetriveService;
+	
+//	@Autowired
+//	private JPAUtilService jpaUtil;
+	
 
 //这种方式：retrive,但是persist时，数据保存不进数据库
 /*	@Autowired
@@ -41,9 +50,8 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 	 }
 
 
-//	@SuppressWarnings("all")
 	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
-	public List<JPACommunityBuilding> retriveAll() {
+	public List<JPACommunityBuilding> retriveAll(String test,int test2) {
 		  String jpql = "select build from JPACommunityBuilding build where 1=1";
 //		  List<JPACommunityBuilding> buildLs = doRetriveFliter(jpql);
 		  //采用hibernate的@Filter方式进行数据过滤
@@ -52,13 +60,13 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 		  return buildLs;
 	}
 	
-	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
+	@SuppressWarnings("unchecked")
 	public List<JPACommunityBuilding> doRetriveAop(String jpql){
-		List resultLs = new ArrayList<JPACommunityBuilding>();
-		
-		return resultLs;
+		List<JPACommunityBuilding> buildingLs = aopRetriveService.doRetrive(jpql,null);;
+		return buildingLs;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
 	public List<JPACommunityBuilding> doRetriveFliter(String jpql){
 		  List<JPACommunityBuilding> buildLs = new ArrayList<JPACommunityBuilding>();

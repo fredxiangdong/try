@@ -20,7 +20,6 @@ public class RowRightUtil {
 	 * @return the busi right
 	 */
 	private static String getBusiRight(String field, String extJpql, QueryParamList extParams) {
-//		HibernateSessionFactory.getSession().g
 		if (SzglCommonUtil.getUserView() != null) {
 			extJpql = SzglCommonUtil.getWhereAnd(extJpql);
 			extJpql += field + " in(select nextBusiPartyId from ComBusiNext a ,RightLoginBusiDetail b "
