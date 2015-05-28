@@ -20,7 +20,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({
 	@Result(name ="input", location ="easyui.jsp"),
 	@Result(name ="login", location ="/login.jsp"),
-	@Result(name ="out", location ="/loginout.jsp")
+	@Result(name ="out", location ="/loginout.jsp"),
 	})
 public class LoginAction extends ActionSupport{
 
@@ -54,6 +54,12 @@ public class LoginAction extends ActionSupport{
 		else{
 			session.put("user", user);
 		}
+	}
+	
+	public void changePwd(){
+		TbUser user = (TbUser)session.get("user");
+		user.setPassword(password);
+		userService.save(user);
 	}
 	
 	public String loginout(){

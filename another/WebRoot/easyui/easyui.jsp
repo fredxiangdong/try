@@ -307,13 +307,21 @@
                 msgShow('系统提示', '两次密码不一致！请重新输入', 'warning');
                 return false;
             }
-
-            $.post('/ajax/editpassword.ashx?newpass=' + newpass.val(), function(msg) {
-                msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + msg, 'info');
-                $newpass.val('');
-                $rePass.val('');
-                close();
-            });
+              $.ajax({
+            	method : "post",
+            	data : {
+            		password : newpass.val()
+            	},
+            	url : "/another/easyui/loginAction!changePwd.do",
+            	success : function(msg){
+// 	                msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + msg, 'info');
+					//觉得没必要后台再传回来一次，就没让后台再传递一次密码
+					msgShow('系统提示', '恭喜，密码修改成功！<br>您的新密码为：' + newpass.val(), 'info');
+	                newpass.val('');
+	                rePass.val('');
+	                closePwd();
+            	}
+            });  
             
         }
 

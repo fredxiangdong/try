@@ -7,6 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fred.trying.entity.TbUser;
 import com.fred.trying.service.UserService;
@@ -34,6 +36,11 @@ public class UserServiceImpl implements UserService{
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	public void save(TbUser user) {
+		em.merge(user);
 	}
 
 }

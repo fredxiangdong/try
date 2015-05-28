@@ -17,9 +17,6 @@ import com.opensymphony.xwork2.ActionContext;
 @Component
 public class RightAop {
 	
-	/**
-	 * Load pointcut.
-	 */
 	@PersistenceContext(unitName="ebwebPU")
 	private EntityManager em;
 

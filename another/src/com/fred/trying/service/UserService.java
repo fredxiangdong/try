@@ -5,4 +5,6 @@ import com.fred.trying.entity.TbUser;
 public interface UserService {
 
 	public TbUser retrive(String username,String password);
+	
+	public void save(TbUser user);
 }
