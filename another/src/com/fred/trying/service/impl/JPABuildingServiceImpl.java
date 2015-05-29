@@ -31,10 +31,6 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 	@Autowired
 	private AopRetriveService aopRetriveService;
 	
-//	@Autowired
-//	private JPAUtilService jpaUtil;
-	
-
 //这种方式：retrive,但是persist时，数据保存不进数据库
 /*	@Autowired
 	private EntityManagerFactory emf;*/
@@ -44,14 +40,9 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 /*	EntityManagerFactory emf = Persistence.createEntityManagerFactory("ebwebPU");
 	EntityManager em = emf.createEntityManager();*/
 	 
-	  //TODO
-	public void remove(String Id){
-
-	 }
-
 
 	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
-	public List<JPACommunityBuilding> retriveAll(String test,int test2) {
+	public List<JPACommunityBuilding> retriveAll() {
 		  String jpql = "select build from JPACommunityBuilding build where 1=1";
 		  List<JPACommunityBuilding> buildLs = doRetriveFliter(jpql);
 		  //采用hibernate的@Filter方式进行数据过滤
@@ -89,8 +80,12 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 	public JPACommunityBuilding save(JPACommunityBuilding building) {
 		if(HyCommonUtil.strIsNull(building.getBuildingId())){
 //		if(building.getBuildingId() == null || building.getBuildingId().trim().equals("")){
-			UUIDGenerator uuidgen = new UUIDGenerator();
-			building.setBuildingId(uuidgen.generate().toString());
+			if(HyCommonUtil.strIsNull(building.getUnitCode())){
+				building.setUnitCode("1");
+			}
+			//UUIDGenerator uuiden = new UUIDGenerator();
+			//主键生成改为静态方法
+			building.setBuildingId(UUIDGenerator.generate().toString());
 			em.persist(building);
 		}else{
 			em.merge(building);

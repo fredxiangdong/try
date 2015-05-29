@@ -39,14 +39,14 @@ public class BuildingServiceImpl implements BuildingService {
 	@SuppressWarnings("all")
 	public List<CrmCommunityBuilding> retriveAll(String Id) {
 		Session session = HibernateSessionFactory.getSessionFactory().openSession();
-		  session.beginTransaction();
-		  // 执行查询操作
-		  Query query = session.createQuery("from CrmCommunityBuilding");
-		  List<CrmCommunityBuilding> list = query.list();
-		  for (CrmCommunityBuilding building : list) {
-//			  System.out.println(building.getBuildingId()+building.getBuildingName());
-		  }
-			return list;
+		session.beginTransaction();
+		// 执行查询操作
+		Query query = session.createQuery("from CrmCommunityBuilding");
+		List<CrmCommunityBuilding> list = query.list();
+		for (CrmCommunityBuilding building : list) {
+		//System.out.println(building.getBuildingId()+building.getBuildingName());
+		}
+		return list;
 	}
 
 }

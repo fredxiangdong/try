@@ -63,7 +63,9 @@ public class PoiAction extends ActionSupport{
 	
 	public void testDocPOI(){
 		ArrayList<RoadSign> signLs = importDocService.readSignFromDoc(docPath);
+		//FileSystemXmlApplicationContext方式获取配置文件
 //		ApplicationContext context = new FileSystemXmlApplicationContext("classpath:applicationContext.xml");
+		//ClassPathXmlApplicationContext方式获取配置文件
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationPath.xml");
 		String filePath = ((Map<String,String>)context.getBean("appExtConfig")).get("filePath");
 		importDocService.writeRoadSignToExcl(filePath, filePath + "公路标志基础数据_位置信息.xls", signLs, "公路标志");

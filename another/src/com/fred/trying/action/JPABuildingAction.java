@@ -61,7 +61,7 @@ public class JPABuildingAction extends ActionSupport{
 	 }
 	 
 	public String retrive(){
-		rows = buildingService.retriveAll("test",1);
+		rows = buildingService.retriveAll();
 		total = String.valueOf(rows.size());
 		return "jsondata";
 	}

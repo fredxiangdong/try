@@ -32,7 +32,7 @@ public class UUIDGenerator {
      * Unique across JVMs on this machine (unless they load this class 
      * in the same quater second - very unlikely) 
      */  
-    protected int getJVM() {  
+    protected static int getJVM() {  
         return JVM;  
     }  
   
@@ -40,7 +40,7 @@ public class UUIDGenerator {
      * Unique in a millisecond for this JVM instance (unless there 
      * are > Short.MAX_VALUE instances created in a millisecond) 
      */  
-    protected short getCount() {  
+    protected static short getCount() {  
         synchronized(UUIDGenerator.class) {  
             if (counter<0) counter=0;  
             return counter++;  
@@ -50,37 +50,38 @@ public class UUIDGenerator {
     /** 
      * Unique in a local network 
      */  
-    protected int getIP() {  
+    protected static int getIP() {  
         return IP;  
     }  
   
     /** 
      * Unique down to millisecond 
      */  
-    protected short getHiTime() {  
+    protected static short getHiTime() {  
         return (short) ( System.currentTimeMillis() >>> 32 );  
     }  
-    protected int getLoTime() {  
+    
+    protected static int getLoTime() {  
         return (int) System.currentTimeMillis();  
     }  
   
     private final static String sep = "";  
   
-    protected String format(int intval) {  
+    protected static String format(int intval) {  
         String formatted = Integer.toHexString(intval);  
         StringBuffer buf = new StringBuffer("00000000");  
         buf.replace( 8-formatted.length(), 8, formatted );  
         return buf.toString();  
     }  
   
-    protected String format(short shortval) {  
+    protected static String format(short shortval) {  
         String formatted = Integer.toHexString(shortval);  
         StringBuffer buf = new StringBuffer("0000");  
         buf.replace( 4-formatted.length(), 4, formatted );  
         return buf.toString();  
     }  
   
-    public Serializable generate() {  
+    public static Serializable generate() {  
         return new StringBuffer(36)  
         .append( format( getIP() ) ).append(sep)  
         .append( format( getJVM() ) ).append(sep)  

@@ -10,13 +10,7 @@ public interface JPABuildingService {
 	 * 查询全部信息
 	 * @return
 	 */
-	public List<JPACommunityBuilding> retriveAll(String test,int test2);
-	
-	/**
-	 * 删除
-	 * @param Id
-	 */
-	public void remove(String Id);
+	public List<JPACommunityBuilding> retriveAll();
 	
 	/**
 	 * 保存
