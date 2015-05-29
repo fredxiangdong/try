@@ -27,28 +27,28 @@
   
   
   	<!-- authority filter 最好加在Struts2的Filter前面-->  
- <filter>  
-    <filter-name>SessionInvalidate</filter-name>  
-    <filter-class>com.fred.system.SessionCheckFilter</filter-class>  
-    <init-param>  
-      <param-name>checkSessionKey</param-name>  
-      <param-value>user</param-value>  
-    </init-param>  
-    <init-param>  
-      <param-name>redirectURL</param-name>  
-      <param-value>/login.jsp</param-value>  
-    </init-param>  
-    <init-param>  
-      <param-name>notCheckURLList</param-name>  
-      <param-value>/login.jsp,/easyui/loginAction.do</param-value>  
-    </init-param>  
-  </filter>  
+ 	<filter>  
+	    <filter-name>SessionInvalidate</filter-name>  
+	    <filter-class>com.fred.system.SessionCheckFilter</filter-class>  
+	    <init-param>  
+	     	 <param-name>checkSessionKey</param-name>  
+	     	 <param-value>user</param-value>  
+	    </init-param>  
+	    <init-param>  
+	      	<param-name>redirectURL</param-name>  
+	     	 <param-value>/login.jsp</param-value>  
+	    </init-param>  
+	    <init-param>  
+	      	<param-name>notCheckURLList</param-name>  
+	     	<param-value>/login.jsp,/easyui/loginAction.do</param-value>  
+	    </init-param>  
+ 	 </filter>  
  
-<!-- 	过滤.do结尾的action -->
-  <filter-mapping>  
-    <filter-name>SessionInvalidate</filter-name>  
-    <url-pattern>*.do</url-pattern>  
-  </filter-mapping>  
+	<!--过滤.do结尾的action -->
+  	<filter-mapping>  
+   		<filter-name>SessionInvalidate</filter-name>  
+    	<url-pattern>*.do</url-pattern>  
+ 	</filter-mapping>  
   
 	<!--url-pattern设定为/*时，会过滤根目录下所有东西，导致login.jsp加载图片失败  -->
 	<!--<filter-mapping>  
@@ -94,7 +94,7 @@
         <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>  
         <init-param>  
         <!-- 指定org.springframework.orm.jpa.LocalEntityManagerFactoryBean在spring配置文件中的名称,默认值为entityManagerFactory  
-                           如果LocalEntityManagerFactoryBean在spring中的名称不是entityManagerFactory,该参数一定要指定,否则会出现找不到entityManagerFactory的异常 -->  
+                                            如果LocalEntityManagerFactoryBean在spring中的名称不是entityManagerFactory,该参数一定要指定,否则会出现找不到entityManagerFactory的异常 -->  
             <param-name>entityManagerFactoryBeanName</param-name>  
             <param-value>entityManagerFactory</param-value>  
         </init-param>   
@@ -104,10 +104,7 @@
         <filter-name>OpenEntityManagerInViewFilter</filter-name>  
         <url-pattern>/*</url-pattern>  
     </filter-mapping>
-
 	
-
-  
 	<!--Spring需要加载的xml文件，若没有配置，则加载默认的/WEB-INF/applicationContext.xml-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

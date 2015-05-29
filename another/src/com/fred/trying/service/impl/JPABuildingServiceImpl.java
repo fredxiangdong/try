@@ -53,9 +53,9 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
 	public List<JPACommunityBuilding> retriveAll(String test,int test2) {
 		  String jpql = "select build from JPACommunityBuilding build where 1=1";
-//		  List<JPACommunityBuilding> buildLs = doRetriveFliter(jpql);
+		  List<JPACommunityBuilding> buildLs = doRetriveFliter(jpql);
 		  //采用hibernate的@Filter方式进行数据过滤
-		  List<JPACommunityBuilding> buildLs = doRetriveAop(jpql);
+//		  List<JPACommunityBuilding> buildLs = doRetriveAop(jpql);
 		  //采用spring的AOP切面方式进行数据过滤
 		  return buildLs;
 	}

@@ -1,7 +1,6 @@
 package com.fred.common.entity.listener;
 
 import java.sql.Timestamp;
-import java.util.Map;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -14,9 +13,7 @@ public class EntityListener {
 
 	private String getUser()
 	  {
-		Map session = ActionContext.getContext().getSession();
-		TbUser user = (TbUser)session.get("user");
-		if(user == null) return "no user";//加拦截器之后其实不必要
+		TbUser user = (TbUser)ActionContext.getContext().getSession().get("user");
 		return user.getUserName();
 	  }
 

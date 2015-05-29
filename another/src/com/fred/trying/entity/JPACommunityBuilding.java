@@ -12,17 +12,7 @@ import org.hibernate.annotations.Filters;
 import org.hibernate.annotations.ParamDef;
 
 import com.fred.common.entity.AuditEntityBean;
-/**
- * 
- * Ð¡ÇøÂ¥Óî±í
- * @author  yxd
- * 
- * <p>Modification History:</p>
- * <p>Date       Author      Description</p>
- * <p>------------------------------------------------------------------</p>
- * <p> 2014-12-4      yxd            new              </p>
- * <p>  </p>
- */
+
 @Entity
 @Table(name = "CRM_COMMUNITY_BUILDING")
 @FilterDef(name = "rightFilter", parameters = @ParamDef(name = "RIGHT_ID", type = "string"))

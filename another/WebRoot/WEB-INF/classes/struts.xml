@@ -21,32 +21,19 @@
 	<constant name="struts.multipart.saveDir" value="E:\temp"></constant>
 	
 	
-<!--  	<package name="struts2" extends="struts-default"> 
-	
-        用户拦截器定义在该元素下  
+	<!--<package name="struts2" extends="struts-default"> 
+        	用户拦截器定义在该元素下  
         <interceptors>
         	定义了一个名为authenticationInterceptor的拦截器 ,此拦截器可实现与web.xml配置的过滤器同等效果。
             <interceptor name="authenticationInterceptor" class="com.fred.system.AuthInterceptor" />  
-      		
       		<interceptor-stack name="myInterceptorStack">  
 	        	<interceptor-ref name="authenticationInterceptor" />  
 	        	<interceptor-ref name="defaultStack" />  
       		</interceptor-stack> 
-      		
         </interceptors>
-        
-		 此默认interceptor是针对所有action的
-        如果某个action中引入了interceptor, 则在这个action中此默认interceptor就会失效
+			 此默认interceptor是针对所有action的
+       		 如果某个action中引入了interceptor, 则在这个action中此默认interceptor就会失效
         <default-interceptor-ref name="myInterceptorStack"></default-interceptor-ref> 
-        
-    </package> 
+    </package> --> 
 	
-      
-     全局Result  
-    <global-results>  
-      	<result name="error">/error.jsp</result>  
-      	<result name="login">/login.jsp</result>  
-    </global-results>   --> 
-    
-      
 </struts>    

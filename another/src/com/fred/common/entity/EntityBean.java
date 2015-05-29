@@ -1,6 +1,5 @@
 package com.fred.common.entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -12,10 +11,8 @@ import com.fred.common.entity.listener.EntityListener;
 
 @MappedSuperclass
 @EntityListeners(EntityListener.class)
-public class EntityBean implements Serializable{
+public class EntityBean{
 	
-	private static final long serialVersionUID = 1L;
-
 	@Column(name="CREATED_STAMP",updatable=false)
 	protected Timestamp createdStamp;
 	
