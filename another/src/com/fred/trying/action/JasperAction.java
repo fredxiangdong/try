@@ -34,7 +34,11 @@ public class JasperAction extends ActionSupport{
 //		map.put("temp", "AT K1+000 to K2+000 drive");
 //		map.put("time", HyCommonUtil.getDateTime());
 		String newFileName  = "testJasper";
-		JasperUtil.exportmain(JasperUtil.PDF_TYPE,"report1.jasper", null, map, newFileName);
+		try{
+			JasperUtil.exportmain(JasperUtil.PDF_TYPE,"report6.jasper", null, map, newFileName);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 //		JasperUtil.exportPdfDir("report.jasper", map);
 //		JasperUtil.exportWordDir("report.jasper", map, null);
 	}
