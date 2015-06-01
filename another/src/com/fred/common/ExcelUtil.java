@@ -63,8 +63,7 @@ public class ExcelUtil {
 				// 数值
 				case Cell.CELL_TYPE_NUMERIC:
 					try {
-						String format = cell.getCellStyle()
-										.getDataFormatString();
+						String format = cell.getCellStyle().getDataFormatString();
 						format = format.replaceAll("[\"|\']", "").replaceAll("[年|月|日|时|分|秒|毫秒|微秒]", "");
 						if (DateUtil.isADateFormat(cell.getCellStyle().getDataFormat(), format)||DateUtil.isCellDateFormatted(cell)) {
 							Timestamp tt = new Timestamp(cell.getDateCellValue().getTime());

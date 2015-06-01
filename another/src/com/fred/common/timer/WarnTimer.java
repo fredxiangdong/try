@@ -30,19 +30,14 @@ public class WarnTimer implements ServletContextListener {
 		// 预警信息，应用启动后每天10点55执行一次
 			Timestamp time1 = HyCommonUtil.addMinute(HyCommonUtil.addHour(HyCommonUtil.addDay(
 					HyCommonUtil.getDayFirst(HyCommonUtil.getDate()), 0), 10),55);
-
-		timer.schedule(new WarnTask(), time1, PERIOD_HOUR);
-		
-/*		Timestamp time2 = HyCommonUtil.addMinute(HyCommonUtil.addHour(HyCommonUtil.addDay(
-				HyCommonUtil.getDayFirst(HyCommonUtil.getDate()), 0), 10),54);
-
-		timer.schedule(new WarnTask(), time2, PERIOD_HOUR);*/
-		//可定义多个定时器
-
+			timer.schedule(new WarnTask(), time1, PERIOD_HOUR);
+			/*Timestamp time2 = HyCommonUtil.addMinute(HyCommonUtil.addHour(HyCommonUtil.addDay(
+					HyCommonUtil.getDayFirst(HyCommonUtil.getDate()), 0), 10),54);
+			timer.schedule(new WarnTask(), time2, PERIOD_HOUR);*/
+			//可定义多个定时器
 		} catch (Exception e) {
 			System.out.println("定时任务主线程异常:" + e.getMessage());
 		}
-
 	}
 
 	/**

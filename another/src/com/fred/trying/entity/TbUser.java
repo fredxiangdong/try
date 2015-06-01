@@ -28,6 +28,7 @@ public class TbUser implements Serializable{
 	private String password;
 	@Column(name = "UNIT_CODE")
 	private String unitCode;
+	
 	public String getUserId() {
 		return userId;
 	}

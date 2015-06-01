@@ -494,17 +494,17 @@ public class HyCommonUtil {
 
 	  public static Timestamp addYear(Timestamp val, int num)
 	  {
-	    return calendarAdd(val, 1, num);
+	    return calendarAdd(val, GregorianCalendar.YEAR, num);
 	  }
 
 	  public static Timestamp addMonth(Timestamp val, int num)
 	  {
-	    return calendarAdd(val, 2, num);
+	    return calendarAdd(val, GregorianCalendar.MONTH, num);
 	  }
 
 	  public static Timestamp addDay(Timestamp val, int num)
 	  {
-	    return calendarAdd(val, 5, num);
+	    return calendarAdd(val, GregorianCalendar.DAY_OF_MONTH, num);
 	  }
 
 

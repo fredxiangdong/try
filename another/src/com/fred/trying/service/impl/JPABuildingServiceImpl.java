@@ -79,7 +79,6 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 	@Transactional(propagation = Propagation.REQUIRED,readOnly=false)
 	public JPACommunityBuilding save(JPACommunityBuilding building) {
 		if(HyCommonUtil.strIsNull(building.getBuildingId())){
-//		if(building.getBuildingId() == null || building.getBuildingId().trim().equals("")){
 			if(HyCommonUtil.strIsNull(building.getUnitCode())){
 				building.setUnitCode("1");
 			}

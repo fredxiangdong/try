@@ -1,7 +1,6 @@
 package com.fred.common.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.Filter;
@@ -13,8 +12,10 @@ import org.hibernate.annotations.ParamDef;
 @MappedSuperclass
 @FilterDef(name = "rightFilter", parameters = @ParamDef(name = "RIGHT_ID", type = "string"))
 @Filters({
-		@Filter(name = "rightFilter",condition = " UNIT_CODE in(:RIGHT_ID)" )
+	@Filter(name = "rightFilter",condition = " UNIT_CODE in(:RIGHT_ID)" )
 })
+
+//hibernate 3.3版本不支持写在父类的@Fileter，从3.6开始支持
 public class AuditEntityBean extends EntityBean{
 	
 	@Column(name = "UNIT_CODE")

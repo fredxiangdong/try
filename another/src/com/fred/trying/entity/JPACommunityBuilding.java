@@ -1,11 +1,15 @@
 package com.fred.trying.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.struts2.json.annotations.JSON;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.Filters;
@@ -64,7 +68,18 @@ public class JPACommunityBuilding extends AuditEntityBean{
 	@Transient
 	private String newName; // 新楼宇名
 	
+/*	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ORG_ID", insertable = false, updatable = false)
+	private OrgorgRel orgorgRel;*/
 
+//此种一对多应用于两表列名不一致的情况，其中referencedColumnName为本类被参考的列名
+/*	@OneToMany
+	@JoinColumn(name = "PAR_ORG_ID", insertable = false, updatable = false, referencedColumnName = "ORG_ID")
+	private List<OrgorgRel> childRel;*/
+	
+	@OneToMany(mappedBy = "building")
+	private List<HouseHode> houseHodeLs;
+	
 	public String getBuildingId() {
 		return buildingId;
 	}
@@ -169,6 +184,18 @@ public class JPACommunityBuilding extends AuditEntityBean{
 	public void setNewName(String newName) {
 		this.newName = newName;
 	}
-	
+
+	@JSON(serialize = false)
+	public List<HouseHode> getHouseHodeLs() {
+		return houseHodeLs;
+	}
+
+	public void setHouseHodeLs(List<HouseHode> houseHodeLs) {
+		this.houseHodeLs = houseHodeLs;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 }

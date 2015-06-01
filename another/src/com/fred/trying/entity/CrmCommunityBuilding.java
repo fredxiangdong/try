@@ -3,7 +3,8 @@ package com.fred.trying.entity;
 import java.util.Date;
 
 /**
- * CrmCommunityBuilding entity. @author MyEclipse Persistence Tools
+ * CrmCommunityBuilding entity. 
+ * @author MyEclipse Persistence Tools
  */
 
 public class CrmCommunityBuilding implements java.io.Serializable {

@@ -8,7 +8,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Map;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.fred.common.UUIDGenerator;
@@ -23,7 +26,6 @@ public class FileTempOperateServiceImpl implements FileTempOperateService {
 	public boolean delFile(String fileName) {
 		boolean flag = false;
 		try {
-
 			File toFile = new File(getTempFilePath() + fileName);
 			if (toFile.exists()) {
 				toFile.delete();
@@ -35,16 +37,17 @@ public class FileTempOperateServiceImpl implements FileTempOperateService {
 		return flag;
 	}
 
+	@SuppressWarnings("unchecked")
 	private String getTempFilePath() {
-//		return ApplicationUtil.getAppConfig().getAppExtProp().get("fileTempPath") + "";
-		return  "E:/";
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationPath.xml");
+		return  ((Map<String,String>)context.getBean("appExtConfig")).get("filePath");
 	}
 
 	public String fileCopy(File importFile, String importFileName) {
 		if (importFile == null)
 			return "";
 		String fileType = importFileName.substring(importFileName.lastIndexOf("."));
-		String toSrc = new UUIDGenerator().generate() + fileType;
+		String toSrc = UUIDGenerator.generate() + fileType;
 		String path = "";
 		File to = null;
 		path = getTempFilePath() + "";
@@ -68,7 +71,6 @@ public class FileTempOperateServiceImpl implements FileTempOperateService {
 					while ((byteread = in.read(buffer)) > 0) {
 						out.write(buffer, 0, byteread);
 					}
-
 				} finally {
 					if (null != in) {
 						in.close();
@@ -85,10 +87,7 @@ public class FileTempOperateServiceImpl implements FileTempOperateService {
 	}
 
 	public File writeTempFile(byte[] data, String filename) {
-//		String path = ApplicationUtil.getAppConfig().getAppExtProp()
-//				.get("fileTempPath")
-//				+ filename;
-		String path = "E:/"+ filename;
+		String path = this.getTempFilePath()+ filename;
 		File outFile = new File(path);
 		FileOutputStream fos = null;
 		try {

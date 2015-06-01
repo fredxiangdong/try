@@ -16,26 +16,22 @@ import com.fred.common.timer.entity.Warning;
  */
 public class WarnTask extends TimerTask {
 
-//	private WarningSettingService warningService = (WarningSettingService) ApplicationUtil.getBean("warningSettingService");	
-	
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void run() {
 		try {
 			this.cleanup();
-//			List<Warning> warningList = warningService.retrieveAll(null, new PageInfo(),new SortParamList());
 			List<Warning> warningList = this.retriveAll();
 			if(warningList.size()>0){				
 				for(Warning warning : warningList){
-//					if(warning.getWarningId().equals(2L)){//TODO
-						this.method102(warning);//2为合同提醒
-//					}						
+					this.method102(warning);//2为合同提醒
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * 清除已统计过的数据
 	 */
@@ -81,7 +77,6 @@ public class WarnTask extends TimerTask {
 		return warnLs;
 	}
 	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
 	private void method102(Warning warning){
 		System.out.println("编号为："+warning.getWarningId()+"的提醒，提醒人为:"+warning.getWarningName()
 				+",内容为："+warning.getWarningDescribe());

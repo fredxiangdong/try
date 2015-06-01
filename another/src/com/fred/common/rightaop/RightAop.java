@@ -29,13 +29,9 @@ public class RightAop {
 		Object retVal = null;
 		Object[] args = pjp.getArgs();
 		args[0] = args[0] + " and unitCode =:unitCode ";
-		try{
-			Query query = em.createQuery(args[0].toString());
-			query.setParameter("unitCode", user.getUnitCode());
-			args[1] = query;
-		}catch (Exception e){
-			e.printStackTrace();
-		}
+		Query query = em.createQuery(args[0].toString());
+		query.setParameter("unitCode", user.getUnitCode());
+		args[1] = query;
 		try {
 			retVal = pjp.proceed(args);
 		} catch (Throwable e){
