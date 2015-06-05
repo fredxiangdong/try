@@ -61,6 +61,7 @@ public class PoiAction extends ActionSupport{
 		importExcelService.importExcel(excelPath);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void testDocPOI(){
 		ArrayList<RoadSign> signLs = importDocService.readSignFromDoc(docPath);
 		//FileSystemXmlApplicationContext方式获取配置文件

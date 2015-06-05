@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fred.poi.service.ImportExcelService;
@@ -22,7 +24,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Namespace("/crm")
 @Action(value="buildingAction")
-@Result(name="input",location="building.jsp")
+@ParentPackage("struts-default")
+@Results({
+	@Result(name="input",location="building.jsp")
+})
 public class BuildingAction extends ActionSupport{
 
 	private static final long serialVersionUID = 1L;
@@ -30,7 +35,6 @@ public class BuildingAction extends ActionSupport{
 	private String test="1";
 	private CrmCommunityBuilding building;
 	private List<CrmCommunityBuilding> buildingLs;
-	private String JSONArray;
 	private int buildingId;
 	private String action;
 	
@@ -41,14 +45,13 @@ public class BuildingAction extends ActionSupport{
 	@Autowired
 	private RetriveStockDataService retriveStockDataService;
 	
-	 HttpServletRequest request=  (HttpServletRequest)ActionContext.getContext() .get(ServletActionContext.HTTP_REQUEST); 
-	 HttpServletResponse response = (HttpServletResponse)ActionContext.getContext() .get(ServletActionContext.HTTP_RESPONSE);
-	 PrintWriter out;
+	HttpServletRequest request=  (HttpServletRequest)ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST); 
+	HttpServletResponse response = (HttpServletResponse)ActionContext.getContext().get(ServletActionContext.HTTP_RESPONSE);
+	PrintWriter out;
+	
 	 @Override
 	public String execute(){ 
-		 System.out.println(action);
 		 if("testAjax".equals(action)){
-			 System.out.println(action);  
 			 this.testAjax();
 		 }else if("importExcel".equals(action)){
 			 this.importExcel();
@@ -60,7 +63,6 @@ public class BuildingAction extends ActionSupport{
 			building = buildingLs.get(0);
 			request.setAttribute("target","PKU");
 		 }
-/*	buildingService.remove("1");*/
 		return "input";
 	}
 	 
@@ -90,8 +92,6 @@ public class BuildingAction extends ActionSupport{
 	 
 	 @Action(value="testAjaxCollect")
 		public String  testAjaxCollect(){
-//		 JSONArray ja = JSONArray.fromObject(JSONArray);
-		 System.out.println("1111111111");
 		 building = buildingLs.get(0);
 			try {
 				out = response.getWriter();
@@ -128,9 +128,6 @@ public class BuildingAction extends ActionSupport{
 		this.buildingLs = buildingLs;
 	}
 
-
-
-
 	public int getBuildingId() {
 		return buildingId;
 	}
@@ -146,14 +143,5 @@ public class BuildingAction extends ActionSupport{
 	public void setAction(String action) {
 		this.action = action;
 	}
-
-	public String getJSONArray() {
-		return JSONArray;
-	}
-
-	public void setJSONArray(String jSONArray) {
-		JSONArray = jSONArray;
-	}
-
 
 }

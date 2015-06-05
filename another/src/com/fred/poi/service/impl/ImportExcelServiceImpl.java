@@ -11,7 +11,6 @@ import com.fred.poi.service.ImportExcelService;
 public class ImportExcelServiceImpl implements ImportExcelService{
 
 	public void importExcel(String filePath){
-		System.out.println(filePath);
 		ExcelUtil e = new ExcelUtil(filePath);
 		int sheetNum = e.getSheetNum();
 		for(int i=0 ; i < sheetNum; i++){

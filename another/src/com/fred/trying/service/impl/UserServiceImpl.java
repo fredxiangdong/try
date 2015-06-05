@@ -21,17 +21,18 @@ public class UserServiceImpl implements UserService{
 	
 	public TbUser retrive(String username, String password) {
 		try{
-//		String jpql = "from TbUser  where userName = '"+username+"' and  password = '"+password +"'";//这种字符串拼接的查询语句，可以注入攻击
-		String jpql = "from TbUser where userName =:userName and password =:password ";
-		Query query = em.createQuery(jpql);
-		query.setParameter("userName", username);
-		query.setParameter("password", password);
-		List<?> userLs= query.getResultList();
-		TbUser user = null;
-		if(userLs.size() != 0){
-			user = (TbUser)userLs.get(0);
-		}
-		return user;
+			//这种字符串拼接的查询语句，可以注入攻击
+//		    String jpql = "from TbUser  where userName = '"+username+"' and  password = '"+password +"'";
+			String jpql = "from TbUser where userName =:userName and password =:password ";
+			Query query = em.createQuery(jpql);
+			query.setParameter("userName", username);
+			query.setParameter("password", password);
+			List<?> userLs= query.getResultList();
+			TbUser user = null;
+			if(userLs.size() != 0){
+				user = (TbUser)userLs.get(0);
+			}
+			return user;
 		}catch(Exception e){
 			e.printStackTrace();
 		}

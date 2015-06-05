@@ -58,7 +58,7 @@ function openWindowWithPost(url, name, keys, values) {
 	}
 	html += "</form>";
 	html += "<scr";
-		html+="ipt type='text/javascript'>document.getElementById(\"formid\").submit()";
+	html+="ipt type='text/javascript'>document.getElementById(\"formid\").submit()";
 	html += "</sc"+"ript>";
 	newWindow.document.write(html);
 	return newWindow;

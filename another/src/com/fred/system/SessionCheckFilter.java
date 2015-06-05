@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
  * 不做检查的URL列表，以分号分开，并且 URL 中不包括 ContextPath 
  */  
 public class SessionCheckFilter implements Filter {  
+	
 	  protected FilterConfig filterConfig = null;  
 	  private String redirectURL = null;  
 	  private Set<String> notCheckURLList = new HashSet<String>();  

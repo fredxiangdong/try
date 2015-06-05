@@ -5,12 +5,15 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.opensymphony.xwork2.ActionSupport;
   
@@ -27,9 +30,11 @@ public class FileUploadAction extends ActionSupport {
 	private String fileFileName;
 	private String fileContentType;
 
+	@SuppressWarnings("unchecked")
 	public String fileUpload() throws Exception {
 		InputStream is = new FileInputStream(file);
-		String root = "E:/temp";
+		ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext");
+		String root = ((Map<String,String>)context.getBean("appExtConfig")).get("filePath");
 		File destFile = new File(root,this.getFileFileName());
 		OutputStream os = new FileOutputStream(destFile);
 		byte[] bytefer = new byte[1024];

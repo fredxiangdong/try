@@ -104,7 +104,6 @@ public class GsonAction extends ActionSupport{
 //		web.xml中增加了encodingFilter过滤器，省去这里的response.setCharacterEncoding,二者需有一个，否则中文乱码
 //		response.setCharacterEncoding("UTF-8");
 		
-		System.out.println(gsonStr);
 		try {
 			PrintWriter out = response.getWriter();
 			out.println(gsonStr);

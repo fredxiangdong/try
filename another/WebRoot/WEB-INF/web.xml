@@ -36,7 +36,7 @@
 	    </init-param>  
 	    <init-param>  
 	      	<param-name>redirectURL</param-name>  
-	     	 <param-value>/login.jsp</param-value>  
+	     	<param-value>/login.jsp</param-value>  
 	    </init-param>  
 	    <init-param>  
 	      	<param-name>notCheckURLList</param-name>  
@@ -89,6 +89,7 @@
 	
 	
  	<!-- 使用spring解决延迟加载问题，针对JPA用EntityManager的方式 -->
+ 	<!-- 必须放在struts2的配置之前，因为Filter是从上向下过滤的 -->
 	<filter>  
         <filter-name>OpenEntityManagerInViewFilter</filter-name>  
         <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>  

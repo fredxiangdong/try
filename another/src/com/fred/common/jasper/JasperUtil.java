@@ -69,6 +69,7 @@ public class JasperUtil {
 	 * @throws JRException
 	 *             the jR exception
 	 */
+	@SuppressWarnings("unchecked")
 	private static Integer exportPdf(JasperPrint jasperPrint,String defaultFilename, HttpServletRequest request,
 			HttpServletResponse response) throws IOException, JRException {
 
@@ -169,6 +170,7 @@ public class JasperUtil {
 	 * @param defaultFilename
 	 *            the default filename
 	 */
+	@SuppressWarnings("unchecked")
 	public static String exportmain(String exportType, String jaspername,
 			List<?> list, Map<String, Object> maps, String defaultFilename) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationPath.xml");
@@ -177,7 +179,7 @@ public class JasperUtil {
 		HttpServletRequest request = (HttpServletRequest) ct
 									.get(ServletActionContext.HTTP_REQUEST);
 		HttpServletResponse response = ServletActionContext.getResponse();
-		File file = new File("E://"+jaspername);
+		File file = new File(fileDir+jaspername);
 		InputStream is = null;
 		try {
 			is = new FileInputStream(file);
@@ -192,7 +194,7 @@ public class JasperUtil {
 	}
 
 
-
+	@SuppressWarnings("unchecked")
 	public static InputStream exportPdfDir(String fileName,
 			Map<String, Object> maps) {// wxl9.11 公文用
 		try {
@@ -217,6 +219,7 @@ public class JasperUtil {
 	}
 	
 	//wxl15.3.1暂未找到@deper替代方法,主要为了gbk
+	@SuppressWarnings("all")
 		public static InputStream exportWordDir(String fileName, Map<String, Object> maps, List<?> ls) {// wxl9.11 公文用
 
 			try {

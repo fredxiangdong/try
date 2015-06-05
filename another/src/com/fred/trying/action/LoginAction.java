@@ -34,7 +34,7 @@ public class LoginAction extends ActionSupport{
 	private UserService userService;
 	
 	ActionContext context = ActionContext.getContext();
-	Map session = context.getSession();
+	Map<String,Object> session = context.getSession();
 	
 	public String execute(){
 		this.login();
