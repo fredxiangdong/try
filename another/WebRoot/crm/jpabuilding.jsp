@@ -86,7 +86,7 @@
 		});
 		
 		//新增弹出框
-/* 		$("#save").on("click", function(){
+ 		$("#save").on("click", function(){
 			$('#frametest').attr('src','/another/crm/jpaBuildingAction!add.do');
 	        $('#dd').window('open');
 		});
@@ -141,6 +141,7 @@
 	}
 	
 	function retrive(){
+
 		$.ajax({
 			method : "post",
 			url : "/another/crm/jpaBuildingAction!retrive.do", 
@@ -156,6 +157,6 @@
 	function reset(){
 		$(".searchCondition").val("");
 	}
-	 */
+	
   </script>
 </html>

@@ -34,8 +34,7 @@ public class CSVUtil {
             // 写入文件头部  
             for (Iterator<Map.Entry<String,String>> propertyIterator = rowMapper.entrySet().iterator(); propertyIterator.hasNext();) {  
                 Entry<String,String> propertyEntry = (Entry<String,String>) propertyIterator.next();  
-                csvFileOutputStream.write("\""  
-                        + propertyEntry.getValue().toString() + "\"");  
+                csvFileOutputStream.write("\"" + propertyEntry.getValue().toString() + "\"");  
                 if (propertyIterator.hasNext()) {  
                     csvFileOutputStream.write(",");  
                 }  
@@ -43,8 +42,6 @@ public class CSVUtil {
             csvFileOutputStream.newLine();  
   
              
-  
-  
             // 写入文件内容  
             for (Iterator<Map<String,String>> iterator = exportData.iterator(); iterator.hasNext();) {    
                // Object row = (Object) iterator.next();    
@@ -54,8 +51,7 @@ public class CSVUtil {
                 for (Iterator<Map.Entry<String,String>> propertyIterator = row.entrySet().iterator(); propertyIterator.hasNext();) {    
                 	Entry<String,String> propertyEntry = (Entry<String,String>) propertyIterator.next();    
                    // System.out.println( BeanUtils.getProperty(row, propertyEntry.getKey().toString()));  
-                    csvFileOutputStream.write("\""    
-                            +  propertyEntry.getValue().toString() + "\"");    
+                    csvFileOutputStream.write("\"" +  propertyEntry.getValue().toString() + "\"");    
                    if (propertyIterator.hasNext()) {    
                        csvFileOutputStream.write(",");    
                     }    

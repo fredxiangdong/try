@@ -2,6 +2,7 @@ package com.fred.trying.service;
 
 import java.util.List;
 
+import com.fred.common.sysmodel.PageInfo;
 import com.fred.trying.entity.JPACommunityBuilding;
 
 public interface JPABuildingService {
@@ -10,7 +11,7 @@ public interface JPABuildingService {
 	 * 查询全部信息
 	 * @return
 	 */
-	public List<JPACommunityBuilding> retriveAll();
+	public List<JPACommunityBuilding> retriveAll(PageInfo pageInfo);
 	
 	/**
 	 * 保存

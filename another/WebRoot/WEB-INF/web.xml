@@ -26,6 +26,8 @@
    </filter-mapping>
   
   
+
+  
   	<!-- authority filter 最好加在Struts2的Filter前面-->  
  	<filter>  
 	    <filter-name>SessionInvalidate</filter-name>  
@@ -45,16 +47,16 @@
  	 </filter>  
  
 	<!--过滤.do结尾的action -->
-  	<filter-mapping>  
+	<filter-mapping>  
    		<filter-name>SessionInvalidate</filter-name>  
     	<url-pattern>*.do</url-pattern>  
- 	</filter-mapping>  
+ 	</filter-mapping>   
   
 	<!--url-pattern设定为/*时，会过滤根目录下所有东西，导致login.jsp加载图片失败  -->
-	<!--<filter-mapping>  
+	<!--	<filter-mapping>  
 	    <filter-name>SessionInvalidate</filter-name>  
 	    <url-pattern>/*</url-pattern>  
-	 </filter-mapping> --> 
+	 </filter-mapping>    -->
   
   
   	<!--StrutsPrepareAndExecuteFilter是自2.1.3开始就替代了FilterDispatcher，是Struts的核心过滤器-->
@@ -116,7 +118,7 @@
 		</param-value> 
 	</context-param>
 
-	<!--ContextLoaderListener监听器的作用是在启动Web容器时，自动装配ApplicationContext的配置信息 -->
+  	<!--ContextLoaderListener监听器的作用是在启动Web容器时，自动装配ApplicationContext的配置信息 -->
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener

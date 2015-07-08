@@ -154,14 +154,17 @@
 	}
 	
 	function retrive(){
+// 			var page = ${"#pageCount"};
+// 		alert(pageCount);
 		$.ajax({
 			method : "post",
 			url : "/another/crm/jpaBuildingAction!retrive.do", 
-			dataType : "text",
+			data : data,
+			dataType : "json",
 			success : function(data){
-				var result = $.parseJSON(data);
-			    var datasource = { total: result.total, rows: result.rows };
-			    $("#tt").datagrid('loadData', datasource);
+// 				var result = $.parseJSON(data);
+// 			    var datasource = { total: result.total, rows: result.rows };
+			    $("#tt").datagrid('loadData', data);
 			 }
 		});
 	}

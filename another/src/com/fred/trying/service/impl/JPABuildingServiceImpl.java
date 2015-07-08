@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fred.common.HyCommonUtil;
 import com.fred.common.UUIDGenerator;
 import com.fred.common.rightaop.AopRetriveService;
+import com.fred.common.sysmodel.PageInfo;
 import com.fred.trying.entity.JPACommunityBuilding;
 import com.fred.trying.entity.TbUser;
 import com.fred.trying.service.JPABuildingService;
@@ -42,9 +43,9 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 	 
 
 	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
-	public List<JPACommunityBuilding> retriveAll() {
+	public List<JPACommunityBuilding> retriveAll(PageInfo pageInfo) {
 		  String jpql = "select build from JPACommunityBuilding build where 1=1";
-		  List<JPACommunityBuilding> buildLs = doRetriveFliter(jpql);
+		  List<JPACommunityBuilding> buildLs = doRetriveFliter(jpql,pageInfo);
 		  //采用hibernate的@Filter方式进行数据过滤
 //		  List<JPACommunityBuilding> buildLs = doRetriveAop(jpql);
 		  //采用spring的AOP切面方式进行数据过滤
@@ -59,7 +60,7 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED,readOnly = true)
-	public List<JPACommunityBuilding> doRetriveFliter(String jpql){
+	public List<JPACommunityBuilding> doRetriveFliter(String jpql,PageInfo pageInfo){
 		  List<JPACommunityBuilding> buildLs = new ArrayList<JPACommunityBuilding>();
 		  TbUser user = (TbUser)ActionContext.getContext().getSession().get("user");
 		  try{
@@ -69,7 +70,11 @@ public class JPABuildingServiceImpl implements JPABuildingService {
 			  Filter filter = session.enableFilter("rightFilter");;
 			  filter.setParameter("RIGHT_ID", user.getUnitCode());
 			  Query query = em.createQuery(jpql);
+			  query.setFirstResult(pageInfo.getCurPageNum()*pageInfo.getRowOfPage());//当前页数
+			  query.setMaxResults(pageInfo.getRowOfPage());//每页条数
 			  buildLs = query.getResultList();
+			  int rowNum = Integer.valueOf(em.createQuery("select count(*) from JPACommunityBuilding").getSingleResult().toString());
+			  pageInfo.setAllRowNum(rowNum);
 		  }catch(Exception e){
 			  e.printStackTrace();
 		  }

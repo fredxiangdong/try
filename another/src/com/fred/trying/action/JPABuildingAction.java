@@ -2,8 +2,6 @@ package com.fred.trying.action;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -12,10 +10,11 @@ import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fred.common.baseaction.EasyGridAction;
+import com.fred.common.sysmodel.EasyGridData;
 import com.fred.trying.entity.JPACommunityBuilding;
 import com.fred.trying.service.JPABuildingService;
 import com.google.gson.Gson;
-import com.opensymphony.xwork2.ActionSupport;
 
 @Namespace("/crm")
 @ParentPackage("json-default")
@@ -23,18 +22,18 @@ import com.opensymphony.xwork2.ActionSupport;
 @Results({
 	@Result(name = "input", location = "buildjpa.jsp"),
 	@Result(name = "add", location = "addbuilding.jsp"),
-	@Result(name = "jsondata",type ="json",params = {"includeproperties","rows.*,total"}),
+	@Result(name = "jsondata",type ="json",params = {"root","gridData"}),
 	@Result(name = "addbck",type = "json", params = {"includeproperties","buildingId"}),
 })
 
-public class JPABuildingAction extends ActionSupport{
+public class JPABuildingAction extends EasyGridAction<JPACommunityBuilding>{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
 	private JPABuildingService buildingService;
 	
-	private List<JPACommunityBuilding> rows = new ArrayList<JPACommunityBuilding>();
+	private EasyGridData<JPACommunityBuilding> gridData = new EasyGridData<JPACommunityBuilding>();
 	
 	private JPACommunityBuilding building;
 	
@@ -45,8 +44,11 @@ public class JPABuildingAction extends ActionSupport{
 	private String action;
 	
 	private String buildingStr;
+	
+//	private String page ;
+//	private String rows;
 	 
-	 @Override
+	@Override
 	public String execute(){ 
 		if("detail".equals(action)){
 			this.detail();
@@ -61,8 +63,10 @@ public class JPABuildingAction extends ActionSupport{
 	 }
 	 
 	public String retrive(){
-		rows = buildingService.retriveAll();
-		total = String.valueOf(rows.size());
+		gridData.setRows(buildingService.retriveAll(getPageInfo())) ;
+		gridData.setTotal( getPageInfo().getAllRowNum());
+/*		rows = buildingService.retriveAll();
+		total = String.valueOf(rows.size());*/
 		return "jsondata";
 	}
 	
@@ -88,14 +92,6 @@ public class JPABuildingAction extends ActionSupport{
 		buildingService.delById(buildingId);
 	}
 	
-	public List<JPACommunityBuilding> getRows() {
-		return rows;
-	}
-
-	public void setRows(List<JPACommunityBuilding> rows) {
-		this.rows = rows;
-	}
-
 	public String getTotal() {
 		return total;
 	}
@@ -136,5 +132,12 @@ public class JPABuildingAction extends ActionSupport{
 		this.buildingStr = buildingStr;
 	}
 
-	
+	public EasyGridData<JPACommunityBuilding> getGridData() {
+		return gridData;
+	}
+
+	public void setGridData(EasyGridData<JPACommunityBuilding> gridData) {
+		this.gridData = gridData;
+	}
+
 }

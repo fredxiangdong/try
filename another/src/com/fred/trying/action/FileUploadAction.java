@@ -33,7 +33,7 @@ public class FileUploadAction extends ActionSupport {
 	@SuppressWarnings("unchecked")
 	public String fileUpload() throws Exception {
 		InputStream is = new FileInputStream(file);
-		ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext");
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationPath.xml");
 		String root = ((Map<String,String>)context.getBean("appExtConfig")).get("filePath");
 		File destFile = new File(root,this.getFileFileName());
 		OutputStream os = new FileOutputStream(destFile);

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.junit.Test;
 import org.springframework.stereotype.Component;
 
 import com.fred.system.HibernateSessionFactory;
@@ -20,11 +21,10 @@ public class BuildingServiceImpl implements BuildingService {
 	  }
 	  Session session = HibernateSessionFactory.getSessionFactory().openSession();
 	  session.beginTransaction();
-	  String hql = "delete from CrmCommunityBuilding where buildingId=?";
 	  Query query = session.createQuery("delete from CrmCommunityBuilding where buildingId = ? ");
 //	  query.setParameter("Id", Id);
 	  query.setString(0, Id);
-//	  int rowCount = query.executeUpdate();
+	  int rowCount = query.executeUpdate();
 	  session.getTransaction().commit();
 	 }
 
@@ -39,6 +39,18 @@ public class BuildingServiceImpl implements BuildingService {
 			//System.out.println(building.getBuildingId()+building.getBuildingName());
 		}
 		return list;
+	}
+
+	@Test
+	public void retriveAllBuilding() {
+		Session session = HibernateSessionFactory.getSessionFactory().openSession();
+		session.beginTransaction();
+		//Ö´ÐÐ²éÑ¯²Ù×÷
+		Query query = session.createQuery("from CrmCommunityBuilding");
+		List<CrmCommunityBuilding> list = query.list();
+		for (CrmCommunityBuilding building : list) {
+			System.out.println(building.getBuildingId()+"  "+building.getBuildingName());
+		}
 	}
 
 }

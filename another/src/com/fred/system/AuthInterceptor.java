@@ -9,10 +9,10 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 public class AuthInterceptor extends AbstractInterceptor {  
 	
-  private static final long serialVersionUID = -5114658085937727056L;  
-  private String sessionKey="loginName";  
-  private String parmKey="withoutAuthentication";  
-  private boolean excluded;  
+	private static final long serialVersionUID = 2734104159013273778L;
+	private String sessionKey="loginName";  
+	private String parmKey="withoutAuthentication";  
+	private boolean excluded;  
   
   @Override  
   public String intercept(ActionInvocation invocation) throws Exception {  
