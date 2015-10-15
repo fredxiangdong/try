@@ -5,6 +5,7 @@ public class FinanceDepartment extends Company{
 	public FinanceDepartment(String name){
 		super(name);
 	}
+	
 	@Override
 	public void Add(Company c) {
 	}

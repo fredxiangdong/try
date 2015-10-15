@@ -9,6 +9,6 @@ public abstract class Abstraction {
 	}
 	
 	public  void Operation(){
-		implementor.Operation();
+//		implementor.Operation();
 	}
 }

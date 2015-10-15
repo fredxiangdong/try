@@ -15,8 +15,9 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	// modelDriven的支持
 	// 使用modelDriven之后，可以在对象栈中直接取到model对象。
 	public BaseAction() {
-		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
-		Class<T> clazz = (Class<T>) pt.getActualTypeArguments()[0];
+		ParameterizedType pt = (ParameterizedType) this.getClass()//Class字节码
+				.getGenericSuperclass(); //因为对于T.class我们无法获取，但是这个方法就能获取到父类的参数类型，返回值为ParameterizedType
+		Class<T> clazz = (Class<T>) pt.getActualTypeArguments()[0];//数组里第一个就是子类继承父类时所用类型
 		try {
 			model = clazz.newInstance();
 		} catch (Exception e) {
